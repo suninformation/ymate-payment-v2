@@ -42,7 +42,7 @@ public class DefaultModuleCfg implements IAliPayModuleCfg {
         Map<String, String> _moduleCfgs = owner.getConfig().getModuleConfigs(IAliPay.MODULE_NAME);
         //
         __gatewayUrl = StringUtils.defaultIfBlank(_moduleCfgs.get("gateway_url"), "https://openapi.alipay.com/gateway.do");
-        if (!StringUtils.startsWithIgnoreCase(__gatewayUrl, "http://") && !StringUtils.startsWithIgnoreCase(__gatewayUrl, "http://")) {
+        if (!StringUtils.startsWithIgnoreCase(__gatewayUrl, "https://") && !StringUtils.startsWithIgnoreCase(__gatewayUrl, "http://")) {
             throw new IllegalArgumentException("AliPay gateway address is invalid");
         }
         //

@@ -27,6 +27,7 @@ import net.ymate.platform.webmvc.annotation.*;
 import net.ymate.platform.webmvc.base.Type;
 import net.ymate.platform.webmvc.view.IView;
 import net.ymate.platform.webmvc.view.View;
+import net.ymate.platform.webmvc.view.impl.HtmlView;
 import net.ymate.platform.webmvc.view.impl.HttpStatusView;
 
 /**
@@ -43,7 +44,7 @@ public class AliPayController {
             AliPayAccountMeta _meta = AliPay.get().getModuleCfg().getAccountProvider().getAccount(appId);
             if (_meta != null) {
                 AliPayTradePagePayRequest _request = new AliPayTradePagePayRequest(_meta, AliPay.get().getModuleCfg().getEventHandler().buildTradePagePayRequestData(orderId, attach));
-                return View.textView(_request.build().executeActionForm());
+                return new HtmlView(_request.build().executeActionForm());
             }
         } catch (Exception e) {
             AliPay.get().getModuleCfg().getEventHandler().onExceptionCaught(RuntimeUtils.unwrapThrow(e));
@@ -57,7 +58,7 @@ public class AliPayController {
             AliPayAccountMeta _meta = AliPay.get().getModuleCfg().getAccountProvider().getAccount(appId);
             if (_meta != null) {
                 AliPayTradeWapPayRequest _request = new AliPayTradeWapPayRequest(_meta, AliPay.get().getModuleCfg().getEventHandler().buildTradeWapPayRequestData(orderId, attach));
-                return View.textView(_request.build().executeActionForm());
+                return new HtmlView(_request.build().executeActionForm());
             }
         } catch (Exception e) {
             AliPay.get().getModuleCfg().getEventHandler().onExceptionCaught(RuntimeUtils.unwrapThrow(e));
