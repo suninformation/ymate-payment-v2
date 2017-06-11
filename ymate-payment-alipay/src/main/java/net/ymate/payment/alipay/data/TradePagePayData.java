@@ -197,60 +197,120 @@ public class TradePagePayData implements IAliPayRequestData {
         return _params;
     }
 
+    public String getOutTradeNo() {
+        return outTradeNo;
+    }
+
     public void setOutTradeNo(String outTradeNo) {
         this.outTradeNo = outTradeNo;
+    }
+
+    public String getProductCode() {
+        return productCode;
     }
 
     public void setProductCode(String productCode) {
         this.productCode = productCode;
     }
 
+    public String getTotalAmount() {
+        return totalAmount;
+    }
+
     public void setTotalAmount(String totalAmount) {
         this.totalAmount = totalAmount;
+    }
+
+    public String getSubject() {
+        return subject;
     }
 
     public void setSubject(String subject) {
         this.subject = subject;
     }
 
+    public String getBody() {
+        return body;
+    }
+
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public String getPassbackParams() {
+        return passbackParams;
     }
 
     public void setPassbackParams(String passbackParams) {
         this.passbackParams = passbackParams;
     }
 
+    public String getGoodsType() {
+        return goodsType;
+    }
+
     public void setGoodsType(String goodsType) {
         this.goodsType = goodsType;
+    }
+
+    public String getTimeoutExpress() {
+        return timeoutExpress;
     }
 
     public void setTimeoutExpress(String timeoutExpress) {
         this.timeoutExpress = timeoutExpress;
     }
 
+    public String getEnablePayChannels() {
+        return enablePayChannels;
+    }
+
     public void setEnablePayChannels(String enablePayChannels) {
         this.enablePayChannels = enablePayChannels;
+    }
+
+    public String getDisablePayChannels() {
+        return disablePayChannels;
     }
 
     public void setDisablePayChannels(String disablePayChannels) {
         this.disablePayChannels = disablePayChannels;
     }
 
+    public String getAuthToken() {
+        return authToken;
+    }
+
     public void setAuthToken(String authToken) {
         this.authToken = authToken;
+    }
+
+    public String getQrPayMode() {
+        return qrPayMode;
     }
 
     public void setQrPayMode(String qrPayMode) {
         this.qrPayMode = qrPayMode;
     }
 
+    public String getQrcodeWidth() {
+        return qrcodeWidth;
+    }
+
     public void setQrcodeWidth(String qrcodeWidth) {
         this.qrcodeWidth = qrcodeWidth;
     }
 
+    public String getSysServiceProviderId() {
+        return sysServiceProviderId;
+    }
+
     public void setSysServiceProviderId(String sysServiceProviderId) {
         this.sysServiceProviderId = sysServiceProviderId;
+    }
+
+    public String getShowUrl() {
+        return showUrl;
     }
 
     public void setShowUrl(String showUrl) {

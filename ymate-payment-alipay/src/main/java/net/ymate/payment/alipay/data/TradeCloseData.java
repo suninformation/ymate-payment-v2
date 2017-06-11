@@ -23,10 +23,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author 刘镇 (suninformation@163.com) on 17/6/12 上午1:26
+ * @author 刘镇 (suninformation@163.com) on 17/6/12 上午2:19
  * @version 1.0
  */
-public class TradeRefundQueryData implements IAliPayRequestData {
+public class TradeCloseData implements IAliPayRequestData {
 
     /**
      * 订单支付时传入的商户订单号,和支付宝交易号不能同时为空。 trade_no,out_trade_no如果同时存在优先取trade_no
@@ -34,37 +34,35 @@ public class TradeRefundQueryData implements IAliPayRequestData {
     private String outTradeNo;
 
     /**
-     * 支付宝交易号, 和商户订单号不能同时为空
+     * 该交易在支付宝系统中的交易流水号。
+     * 最短16位, 最长64位。和out_trade_no不能同时为空，如果同时传了out_trade_no和trade_no, 则以trade_no为准
      */
     private String tradeNo;
 
     /**
-     * 请求退款接口时，传入的退款请求号，如果在退款请求时未传入，则该值为创建交易时的外部交易号
+     * 卖家端自定义的的操作员 ID
      */
-    private String outRequestNo;
+    private String operatorId;
 
-    public TradeRefundQueryData(String outTradeNo, String tradeNo, String outRequestNo) {
+    public TradeCloseData(String outTradeNo, String tradeNo) {
         if (StringUtils.isBlank(outTradeNo) && StringUtils.isBlank(tradeNo)) {
             throw new NullArgumentException("outTradeNo or tradeNo");
         }
-        if (StringUtils.isBlank(outRequestNo)) {
-            throw new NullArgumentException("outRequestNo");
-        }
         this.outTradeNo = outTradeNo;
         this.tradeNo = tradeNo;
-        this.outRequestNo = outRequestNo;
     }
 
     public Map<String, String> buildRequestParams() {
         Map<String, String> _params = new HashMap<String, String>();
-        //
-        _params.put("out_request_no", outRequestNo);
         //
         if (StringUtils.isNotBlank(outTradeNo)) {
             _params.put("out_trade_no", outTradeNo);
         }
         if (StringUtils.isNotBlank(tradeNo)) {
             _params.put("trade_no", tradeNo);
+        }
+        if (StringUtils.isNotBlank(operatorId)) {
+            _params.put("operator_id", operatorId);
         }
         //
         return _params;
@@ -86,11 +84,11 @@ public class TradeRefundQueryData implements IAliPayRequestData {
         this.tradeNo = tradeNo;
     }
 
-    public String getOutRequestNo() {
-        return outRequestNo;
+    public String getOperatorId() {
+        return operatorId;
     }
 
-    public void setOutRequestNo(String outRequestNo) {
-        this.outRequestNo = outRequestNo;
+    public void setOperatorId(String operatorId) {
+        this.operatorId = operatorId;
     }
 }
