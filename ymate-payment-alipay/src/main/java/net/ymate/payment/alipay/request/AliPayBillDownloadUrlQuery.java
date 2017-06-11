@@ -43,6 +43,9 @@ public class AliPayBillDownloadUrlQuery extends AliPayBaseRequest<BillDownloadUr
      */
     public static class Response extends AliPayBaseResponse {
 
+        /**
+         * 账单下载地址链接，获取连接后30秒后未下载，链接地址失效
+         */
         @JSONField(name = "bill_download_url")
         private String billDownloadUrl;
 

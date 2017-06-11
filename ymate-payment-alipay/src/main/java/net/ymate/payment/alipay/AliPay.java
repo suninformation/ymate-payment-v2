@@ -18,9 +18,9 @@ package net.ymate.payment.alipay;
 import net.ymate.payment.alipay.base.AliPayAccountMeta;
 import net.ymate.payment.alipay.base.AliPayBaseNotify;
 import net.ymate.payment.alipay.base.AliPayBaseReturn;
+import net.ymate.payment.alipay.data.*;
 import net.ymate.payment.alipay.impl.DefaultModuleCfg;
-import net.ymate.payment.alipay.request.AliPayTradePagePay;
-import net.ymate.payment.alipay.request.AliPayTradeWapPay;
+import net.ymate.payment.alipay.request.*;
 import net.ymate.platform.core.Version;
 import net.ymate.platform.core.YMP;
 import net.ymate.platform.core.module.IModule;
@@ -94,6 +94,46 @@ public class AliPay implements IModule, IAliPay {
         AliPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
         if (_meta != null && __moduleCfg.getEventHandler() != null) {
             return new AliPayTradeWapPay(_meta, __moduleCfg.getEventHandler().buildTradeWapPayData(orderId, attach));
+        }
+        return null;
+    }
+
+    public IAliPayRequest<AliPayTradeQuery.Response> tradeQuery(String appId, String tradeNo, String outTradeNo) throws Exception {
+        AliPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
+        if (_meta != null) {
+            return new AliPayTradeQuery(_meta, new TradeQueryData(outTradeNo, tradeNo));
+        }
+        return null;
+    }
+
+    public IAliPayRequest<AliPayTradeRefund.Response> tradeRefund(String appId, TradeRefundData refundData) throws Exception {
+        AliPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
+        if (_meta != null) {
+            return new AliPayTradeRefund(_meta, refundData);
+        }
+        return null;
+    }
+
+    public IAliPayRequest<AliPayTradeRefundQuery.Response> tradeRefundQuery(String appId, String tradeNo, String outTradeNo, String outRequestNo) throws Exception {
+        AliPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
+        if (_meta != null) {
+            return new AliPayTradeRefundQuery(_meta, new TradeRefundQueryData(outTradeNo, tradeNo, outRequestNo));
+        }
+        return null;
+    }
+
+    public IAliPayRequest<AliPayTradeClose.Response> tradeClose(String appId, String tradeNo, String outTradeNo) throws Exception {
+        AliPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
+        if (_meta != null) {
+            return new AliPayTradeClose(_meta, new TradeCloseData(outTradeNo, tradeNo));
+        }
+        return null;
+    }
+
+    public IAliPayRequest<AliPayBillDownloadUrlQuery.Response> billDownloadUrlQuery(String appId, String billType, String billDate) throws Exception {
+        AliPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
+        if (_meta != null) {
+            return new AliPayBillDownloadUrlQuery(_meta, new BillDownloadUrlQueryData(billType, billDate));
         }
         return null;
     }

@@ -43,9 +43,15 @@ public class AliPayTradeClose extends AliPayBaseRequest<TradeCloseData, AliPayTr
      */
     public static class Response extends AliPayBaseResponse {
 
+        /**
+         * 支付宝交易号
+         */
         @JSONField(name = "trade_no")
         private String tradeNo;
 
+        /**
+         * 创建交易传入的商户订单号
+         */
         @JSONField(name = "out_trade_no")
         private String outTradeNo;
 

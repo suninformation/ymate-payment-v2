@@ -17,6 +17,8 @@ package net.ymate.payment.alipay;
 
 import net.ymate.payment.alipay.base.AliPayBaseNotify;
 import net.ymate.payment.alipay.base.AliPayBaseReturn;
+import net.ymate.payment.alipay.data.TradeRefundData;
+import net.ymate.payment.alipay.request.*;
 import net.ymate.platform.core.YMP;
 import net.ymate.platform.webmvc.view.IView;
 
@@ -62,12 +64,60 @@ public interface IAliPay {
     IAliPayRequest tradeWapPay(String appId, String orderId, String attach) throws Exception;
 
     /**
+     * @param appId      开发者的应用ID
+     * @param tradeNo    支付宝交易号
+     * @param outTradeNo 商户订单号
+     * @return 统一收单线下交易查询
+     * @throws Exception 可能产生的任何异常
+     */
+    IAliPayRequest<AliPayTradeQuery.Response> tradeQuery(String appId, String tradeNo, String outTradeNo) throws Exception;
+
+    /**
+     * @return 统一收单交易退款
+     * @throws Exception 可能产生的任何异常
+     */
+    IAliPayRequest<AliPayTradeRefund.Response> tradeRefund(String appId, TradeRefundData refundData) throws Exception;
+
+    /**
+     * @param appId        开发者的应用ID
+     * @param tradeNo      支付宝交易号
+     * @param outTradeNo   商户订单号
+     * @param outRequestNo 退款请求号
+     * @return 统一收单交易退款查询
+     * @throws Exception 可能产生的任何异常
+     */
+    IAliPayRequest<AliPayTradeRefundQuery.Response> tradeRefundQuery(String appId, String tradeNo, String outTradeNo, String outRequestNo) throws Exception;
+
+    /**
+     * @param appId      开发者的应用ID
+     * @param tradeNo    支付宝交易号
+     * @param outTradeNo 创建交易传入的商户订单号
+     * @return 统一收单交易关闭
+     * @throws Exception 可能产生的任何异常
+     */
+    IAliPayRequest<AliPayTradeClose.Response> tradeClose(String appId, String tradeNo, String outTradeNo) throws Exception;
+
+    /**
+     * @param appId    开发者的应用ID
+     * @param billType 账单类型
+     * @param billDate 账单时间
+     * @return 查询对账单下载地址
+     * @throws Exception 可能产生的任何异常
+     */
+    IAliPayRequest<AliPayBillDownloadUrlQuery.Response> billDownloadUrlQuery(String appId, String billType, String billDate) throws Exception;
+
+    /**
      * @param baseNotify 异步通知对象
      * @return 处理异步通知并返回回应字符串
      * @throws Exception 可能产生的任何异常
      */
     String onNotify(AliPayBaseNotify baseNotify) throws Exception;
 
+    /**
+     * @param baseReturn 页面跳转参数对象
+     * @return 同步回调处理
+     * @throws Exception 可能产生的任何异常
+     */
     IView onReturnCallback(AliPayBaseReturn baseReturn) throws Exception;
 
     /**
