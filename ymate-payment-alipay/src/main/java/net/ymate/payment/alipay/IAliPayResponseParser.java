@@ -26,8 +26,8 @@ public interface IAliPayResponseParser<RESPONSE extends IAliPayResponse> {
     /**
      * 什么也不做的响应数据分析器
      */
-    class NOTHINE implements IAliPayResponseParser<IAliPayResponse.NOTHINE> {
-        public IAliPayResponse.NOTHINE parserResponse(IHttpResponse httpResponse) throws Exception {
+    class NOTHING implements IAliPayResponseParser<IAliPayResponse.NOTHING> {
+        public IAliPayResponse.NOTHING parserResponse(IHttpResponse httpResponse) throws Exception {
             throw new UnsupportedOperationException();
         }
     }

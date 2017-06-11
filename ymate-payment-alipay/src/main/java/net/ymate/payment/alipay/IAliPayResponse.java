@@ -24,7 +24,7 @@ public interface IAliPayResponse<DATA extends IAliPayResponseData> {
     /**
      * 什么也不做的响应数据接口实现
      */
-    class NOTHINE implements IAliPayResponse {
+    class NOTHING implements IAliPayResponse {
         public String getCode() {
             throw new UnsupportedOperationException();
         }

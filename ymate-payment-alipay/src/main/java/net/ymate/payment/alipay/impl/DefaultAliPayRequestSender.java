@@ -34,12 +34,15 @@ public class DefaultAliPayRequestSender<RESPONSE extends IAliPayResponse> implem
 
     private String gatewayUrl;
 
+    private String charset;
+
     private Map<String, String> requestParameters;
 
     private IAliPayResponseParser<RESPONSE> responseParser;
 
-    public DefaultAliPayRequestSender(Map<String, String> requestParameters, IAliPayResponseParser<RESPONSE> responseParser) {
+    public DefaultAliPayRequestSender(Map<String, String> requestParameters, String charset, IAliPayResponseParser<RESPONSE> responseParser) {
         this.gatewayUrl = AliPay.get().getModuleCfg().getGatewayUrl();
+        this.charset = charset;
         if (requestParameters != null) {
             this.requestParameters = requestParameters;
         } else {
@@ -48,12 +51,20 @@ public class DefaultAliPayRequestSender<RESPONSE extends IAliPayResponse> implem
         this.responseParser = responseParser;
     }
 
+    public String getGatewayUrl() {
+        return gatewayUrl;
+    }
+
+    public Map<String, String> getRequestParameters() {
+        return requestParameters;
+    }
+
     public RESPONSE execute() throws Exception {
         IHttpResponse _response = HttpClientHelper.create().post(this.gatewayUrl, this.requestParameters);
         return this.responseParser.parserResponse(_response);
     }
 
     public String executeActionForm() {
-        return ParamUtils.buildActionForm(this.gatewayUrl, true, requestParameters);
+        return ParamUtils.buildActionForm(this.gatewayUrl, true, false, true, charset, requestParameters);
     }
 }

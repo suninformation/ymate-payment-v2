@@ -23,7 +23,6 @@ import net.ymate.payment.alipay.base.AliPayBaseNotify;
 import net.ymate.payment.alipay.base.AliPayBaseReturn;
 import net.ymate.payment.alipay.request.AliPayTradePagePayRequest;
 import net.ymate.payment.alipay.request.AliPayTradeWapPayRequest;
-import net.ymate.platform.core.util.ExpressionUtils;
 import net.ymate.platform.core.util.RuntimeUtils;
 import net.ymate.platform.webmvc.annotation.*;
 import net.ymate.platform.webmvc.base.Type;
@@ -41,18 +40,13 @@ import org.apache.commons.lang.StringUtils;
 @RequestMapping("/payment/alipay")
 public class AliPayController {
 
-    private static String __HTMP_TMPL = "<!DOCTYPE html><!--[if IE 8]><html lang=\"en\" class=\"ie8 no-js\"> <![endif]--><!--[if IE 9]><html lang=\"en\" class=\"ie9 no-js\"> <![endif]--><!--[if !IE]><!--><html lang=\"en\" class=\"no-js\"><!--<![endif]--><head><meta charset=\"${charset}\"><title>跳转支付</title></head><body>${body}</body></html>";
-
     @RequestMapping(value = "/{app_id}/page", method = {Type.HttpMethod.POST, Type.HttpMethod.GET})
     public IView __pagePay(@PathVariable("app_id") String appId, @RequestParam String state, @RequestParam String attach) throws Exception {
         try {
             AliPayAccountMeta _meta = AliPay.get().getModuleCfg().getAccountProvider().getAccount(appId);
             if (_meta != null) {
-                String _charset = StringUtils.defaultIfBlank(_meta.getCharset(), IAliPay.Const.CHARSET_UTF8);
-                //
                 AliPayTradePagePayRequest _request = new AliPayTradePagePayRequest(_meta, AliPay.get().getModuleCfg().getEventHandler().buildTradePagePayRequestData(state, attach));
-                String _content = ExpressionUtils.bind(__HTMP_TMPL).set("charset", _charset).set("body", _request.build().executeActionForm()).getResult();
-                return new HtmlView(_content);
+                return new HtmlView(_request.build().executeActionForm()).setContentType(Type.ContentType.HTML.getContentType().concat("; charset=").concat(StringUtils.defaultIfBlank(_meta.getCharset(), IAliPay.Const.CHARSET_UTF8)));
             }
         } catch (Exception e) {
             AliPay.get().getModuleCfg().getEventHandler().onExceptionCaught(RuntimeUtils.unwrapThrow(e));
@@ -65,11 +59,8 @@ public class AliPayController {
         try {
             AliPayAccountMeta _meta = AliPay.get().getModuleCfg().getAccountProvider().getAccount(appId);
             if (_meta != null) {
-                String _charset = StringUtils.defaultIfBlank(_meta.getCharset(), IAliPay.Const.CHARSET_UTF8);
-                //
                 AliPayTradeWapPayRequest _request = new AliPayTradeWapPayRequest(_meta, AliPay.get().getModuleCfg().getEventHandler().buildTradeWapPayRequestData(state, attach));
-                String _content = ExpressionUtils.bind(__HTMP_TMPL).set("charset", _charset).set("body", _request.build().executeActionForm()).getResult();
-                return new HtmlView(_content);
+                return new HtmlView(_request.build().executeActionForm()).setContentType(Type.ContentType.HTML.getContentType().concat("; charset=").concat(StringUtils.defaultIfBlank(_meta.getCharset(), IAliPay.Const.CHARSET_UTF8)));
             }
         } catch (Exception e) {
             AliPay.get().getModuleCfg().getEventHandler().onExceptionCaught(RuntimeUtils.unwrapThrow(e));

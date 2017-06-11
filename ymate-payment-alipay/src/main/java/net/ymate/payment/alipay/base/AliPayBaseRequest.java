@@ -74,9 +74,11 @@ public class AliPayBaseRequest<DATA extends IAliPayRequestData, RESPONSE extends
     public IAliPayReqeustSender<RESPONSE> build() throws Exception {
         Map<String, String> _params = new HashMap<String, String>();
         //
+        String _charset = StringUtils.defaultIfBlank(accountMeta.getCharset(), IAliPay.Const.CHARSET_UTF8);
+        //
         _params.put(IAliPay.Const.APP_ID, accountMeta.getAppId());
         _params.put(IAliPay.Const.METHOD, method);
-        _params.put(IAliPay.Const.CHARSET, accountMeta.getCharset());
+        _params.put(IAliPay.Const.CHARSET, _charset);
         _params.put(IAliPay.Const.FORMAT, accountMeta.getFormat());
         _params.put(IAliPay.Const.SIGN_TYPE, accountMeta.getSignType().name());
         _params.put(IAliPay.Const.TIMESTAMP, DateTimeUtils.formatTime(System.currentTimeMillis(), IAliPay.Const.DATE_TIME_FORMAT));
@@ -94,10 +96,10 @@ public class AliPayBaseRequest<DATA extends IAliPayRequestData, RESPONSE extends
         String _bizContentStr = JSON.toJSONString(this.bizContent.buildRequestParams(), SerializerFeature.QuoteFieldNames);
         _params.put(IAliPay.Const.BIZ_CONTENT_KEY, _bizContentStr);
         //
-        String _signStr = SignatureUtils.sign(_params, accountMeta.getPrivateKey(), accountMeta.getCharset(), accountMeta.getSignType());
+        String _signStr = SignatureUtils.sign(_params, accountMeta.getPrivateKey(), _charset, accountMeta.getSignType());
         _params.put(IAliPay.Const.SIGN, _signStr);
         //
-        return new DefaultAliPayRequestSender<RESPONSE>(_params, this.responseParser);
+        return new DefaultAliPayRequestSender<RESPONSE>(_params, _charset, this.responseParser);
     }
 
     public AliPayAccountMeta getAccountMeta() {

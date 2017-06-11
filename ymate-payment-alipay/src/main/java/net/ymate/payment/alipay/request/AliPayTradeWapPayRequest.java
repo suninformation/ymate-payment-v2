@@ -27,9 +27,9 @@ import net.ymate.payment.alipay.data.AliPayTradeWapPayRequestData;
  * @author 刘镇 (suninformation@163.com) on 17/6/8 下午4:57
  * @version 1.0
  */
-public class AliPayTradeWapPayRequest extends AliPayBaseRequest<AliPayTradeWapPayRequestData, IAliPayResponse.NOTHINE> {
+public class AliPayTradeWapPayRequest extends AliPayBaseRequest<AliPayTradeWapPayRequestData, IAliPayResponse.NOTHING> {
 
     public AliPayTradeWapPayRequest(AliPayAccountMeta accountMeta, AliPayTradeWapPayRequestData bizContent) {
-        super(accountMeta, "alipay.trade.wap.pay", "1.0", bizContent, true, new IAliPayResponseParser.NOTHINE());
+        super(accountMeta, "alipay.trade.wap.pay", "1.0", bizContent, true, new IAliPayResponseParser.NOTHING());
     }
 }

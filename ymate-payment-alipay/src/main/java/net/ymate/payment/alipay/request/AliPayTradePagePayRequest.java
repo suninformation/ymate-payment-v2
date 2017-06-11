@@ -27,9 +27,9 @@ import net.ymate.payment.alipay.data.AliPayTradePagePayRequestData;
  * @author 刘镇 (suninformation@163.com) on 17/6/8 下午4:57
  * @version 1.0
  */
-public class AliPayTradePagePayRequest extends AliPayBaseRequest<AliPayTradePagePayRequestData, IAliPayResponse.NOTHINE> {
+public class AliPayTradePagePayRequest extends AliPayBaseRequest<AliPayTradePagePayRequestData, IAliPayResponse.NOTHING> {
 
     public AliPayTradePagePayRequest(AliPayAccountMeta accountMeta, AliPayTradePagePayRequestData bizContent) {
-        super(accountMeta, "alipay.trade.page.pay", "1.0", bizContent, true, new IAliPayResponseParser.NOTHINE());
+        super(accountMeta, "alipay.trade.page.pay", "1.0", bizContent, true, new IAliPayResponseParser.NOTHING());
     }
 }

@@ -15,11 +15,23 @@
  */
 package net.ymate.payment.alipay;
 
+import java.util.Map;
+
 /**
  * @author 刘镇 (suninformation@163.com) on 17/6/7 上午11:37
  * @version 1.0
  */
 public interface IAliPayReqeustSender<RESPONSE extends IAliPayResponse> {
+
+    /**
+     * @return 返回接口请求网关地址
+     */
+    String getGatewayUrl();
+
+    /**
+     * @return 返回请求参数映射
+     */
+    Map<String, String> getRequestParameters();
 
     /**
      * @return 执行请求发送并返回响应结果对象
