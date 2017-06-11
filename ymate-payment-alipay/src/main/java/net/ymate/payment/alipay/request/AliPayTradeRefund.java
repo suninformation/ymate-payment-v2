@@ -20,6 +20,7 @@ import net.ymate.payment.alipay.base.AliPayAccountMeta;
 import net.ymate.payment.alipay.base.AliPayBaseRequest;
 import net.ymate.payment.alipay.base.AliPayBaseResponse;
 import net.ymate.payment.alipay.base.AliPayBaseResponseParser;
+import net.ymate.payment.alipay.data.FundItemData;
 import net.ymate.payment.alipay.data.TradeRefundData;
 import org.apache.commons.lang.StringUtils;
 
@@ -76,7 +77,7 @@ public class AliPayTradeRefund extends AliPayBaseRequest<TradeRefundData, AliPay
         private String buyerUserId;
 
         @JSONField(name = "refund_detail_item_list")
-        private RefundItem[] detailItems;
+        private FundItemData[] detailItems;
 
         public boolean successful() {
             return StringUtils.equalsIgnoreCase(fundChange, "Y");
@@ -154,58 +155,12 @@ public class AliPayTradeRefund extends AliPayBaseRequest<TradeRefundData, AliPay
             this.buyerUserId = buyerUserId;
         }
 
-        public RefundItem[] getDetailItems() {
+        public FundItemData[] getDetailItems() {
             return detailItems;
         }
 
-        public void setDetailItems(RefundItem[] detailItems) {
+        public void setDetailItems(FundItemData[] detailItems) {
             this.detailItems = detailItems;
-        }
-    }
-
-    public static class RefundItem {
-
-        @JSONField(name = "fund_channel")
-        private String fundChannel;
-
-        private String amount;
-
-        @JSONField(name = "real_amount")
-        private String realAmount;
-
-        @JSONField(name = "fund_type")
-        private String fundType;
-
-        public String getFundChannel() {
-            return fundChannel;
-        }
-
-        public void setFundChannel(String fundChannel) {
-            this.fundChannel = fundChannel;
-        }
-
-        public String getAmount() {
-            return amount;
-        }
-
-        public void setAmount(String amount) {
-            this.amount = amount;
-        }
-
-        public String getRealAmount() {
-            return realAmount;
-        }
-
-        public void setRealAmount(String realAmount) {
-            this.realAmount = realAmount;
-        }
-
-        public String getFundType() {
-            return fundType;
-        }
-
-        public void setFundType(String fundType) {
-            this.fundType = fundType;
         }
     }
 }
