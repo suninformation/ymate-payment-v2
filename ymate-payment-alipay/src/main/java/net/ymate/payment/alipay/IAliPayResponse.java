@@ -19,7 +19,7 @@ package net.ymate.payment.alipay;
  * @author 刘镇 (suninformation@163.com) on 17/6/7 上午11:59
  * @version 1.0
  */
-public interface IAliPayResponse<DATA extends IAliPayResponseData> {
+public interface IAliPayResponse {
 
     /**
      * 什么也不做的响应数据接口实现
@@ -45,11 +45,11 @@ public interface IAliPayResponse<DATA extends IAliPayResponseData> {
             throw new UnsupportedOperationException();
         }
 
-        public IAliPayResponseData getBizConent() {
+        public void setSign(String sign) {
             throw new UnsupportedOperationException();
         }
 
-        public boolean isSuccess() {
+        public boolean successful() {
             throw new UnsupportedOperationException();
         }
     }
@@ -79,13 +79,10 @@ public interface IAliPayResponse<DATA extends IAliPayResponseData> {
      */
     String getSign();
 
-    /**
-     * @return 业务数据对象
-     */
-    DATA getBizConent();
+    void setSign(String sign);
 
     /**
      * @return 业务处理是否成功
      */
-    boolean isSuccess();
+    boolean successful();
 }

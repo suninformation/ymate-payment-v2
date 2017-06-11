@@ -15,8 +15,6 @@
  */
 package net.ymate.payment.alipay;
 
-import net.ymate.framework.commons.IHttpResponse;
-
 /**
  * @author 刘镇 (suninformation@163.com) on 17/6/8 下午4:44
  * @version 1.0
@@ -27,15 +25,15 @@ public interface IAliPayResponseParser<RESPONSE extends IAliPayResponse> {
      * 什么也不做的响应数据分析器
      */
     class NOTHING implements IAliPayResponseParser<IAliPayResponse.NOTHING> {
-        public IAliPayResponse.NOTHING parserResponse(IHttpResponse httpResponse) throws Exception {
+        public IAliPayResponse.NOTHING parserResponse(String responseContent) throws Exception {
             throw new UnsupportedOperationException();
         }
     }
 
     /**
-     * @param httpResponse HTTP响应结果对象
+     * @param responseContent HTTP响应结果报文
      * @return 分析响应报文并返回接口回应结果对象
      * @throws Exception 可能产生的异常
      */
-    RESPONSE parserResponse(IHttpResponse httpResponse) throws Exception;
+    RESPONSE parserResponse(String responseContent) throws Exception;
 }

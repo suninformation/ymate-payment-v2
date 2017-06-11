@@ -19,7 +19,7 @@ import net.ymate.payment.alipay.IAliPayResponse;
 import net.ymate.payment.alipay.IAliPayResponseParser;
 import net.ymate.payment.alipay.base.AliPayAccountMeta;
 import net.ymate.payment.alipay.base.AliPayBaseRequest;
-import net.ymate.payment.alipay.data.AliPayTradePagePayRequestData;
+import net.ymate.payment.alipay.data.TradePagePayData;
 
 /**
  * PC场景下单并支付
@@ -27,9 +27,9 @@ import net.ymate.payment.alipay.data.AliPayTradePagePayRequestData;
  * @author 刘镇 (suninformation@163.com) on 17/6/8 下午4:57
  * @version 1.0
  */
-public class AliPayTradePagePayRequest extends AliPayBaseRequest<AliPayTradePagePayRequestData, IAliPayResponse.NOTHING> {
+public class AliPayTradePagePay extends AliPayBaseRequest<TradePagePayData, IAliPayResponse.NOTHING> {
 
-    public AliPayTradePagePayRequest(AliPayAccountMeta accountMeta, AliPayTradePagePayRequestData bizContent) {
+    public AliPayTradePagePay(AliPayAccountMeta accountMeta, TradePagePayData bizContent) {
         super(accountMeta, "alipay.trade.page.pay", "1.0", bizContent, true, new IAliPayResponseParser.NOTHING());
     }
 }

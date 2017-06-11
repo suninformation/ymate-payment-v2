@@ -48,6 +48,69 @@ public interface IAliPay {
     }
 
     /**
+     * 交易状态
+     */
+    enum TradeStatus {
+        WAIT_BUYER_PAY, TRADE_CLOSE, TRADE_SUCCESS, TRADE_FINISHED
+    }
+
+    /**
+     * 支付渠道
+     */
+    enum PayChannel {
+
+        BALANCE("余额"),
+
+        MONEYFUND("余额宝"),
+
+        COUPON("红包"),
+
+        PCREDIT("花呗"),
+
+        PCREDITPAYINSTALLMENT("花呗分期"),
+
+        CREDITCARD("信用卡"),
+
+        CREDITCARDEXPRESS("信用卡快捷"),
+
+        CREDITCARDCARTOON("信用卡卡通"),
+
+        /**
+         * 信用支付类型（包含信用卡卡通、信用卡快捷、花呗、花呗分期）
+         */
+        CREDIT_GROUP("信用支付类型"),
+
+        DEBITCARDEXPRESS("借记卡快捷"),
+
+        MCARD("商户预存卡"),
+
+        PCARD("个人预存卡"),
+
+        /**
+         * 优惠（包含实时优惠+商户优惠）
+         */
+        PROMOTION("优惠"),
+
+        VOUCHER("营销券"),
+
+        POINT("积分"),
+
+        MDISCOUNT("商户优惠"),
+
+        BANKPAY("网银");
+
+        private String channelName;
+
+        PayChannel(String channelName) {
+            this.channelName = channelName;
+        }
+
+        public String channelName() {
+            return this.channelName;
+        }
+    }
+
+    /**
      * 常量
      */
     interface Const {
@@ -76,13 +139,13 @@ public interface IAliPay {
 
         String SIGN = "sign";
 
-        String ACCESS_TOKEN = "auth_token";
-
-        String APP_AUTH_TOKEN = "app_auth_token";
-
-        String TERMINAL_TYPE = "terminal_type";
-
-        String TERMINAL_INFO = "terminal_info";
+//        String ACCESS_TOKEN = "auth_token";
+//
+//        String APP_AUTH_TOKEN = "app_auth_token";
+//
+//        String TERMINAL_TYPE = "terminal_type";
+//
+//        String TERMINAL_INFO = "terminal_info";
 
         String CHARSET = "charset";
 
@@ -104,13 +167,11 @@ public interface IAliPay {
 
         String FORMAT_JSON = "json";
 
-        String PROD_CODE = "prod_code";
+//        String PROD_CODE = "prod_code";
 
         String PROD_CODE_PAGE = "FAST_INSTANT_TRADE_PAY";
 
         String PROD_CODE_WAP = "QUICK_WAP_PAY";
-
-        String ERROR_RESPONSE = "error_response";
 
         String RESPONSE_SUFFIX = "_response";
 

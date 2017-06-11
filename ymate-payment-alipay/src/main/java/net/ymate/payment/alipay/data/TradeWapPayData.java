@@ -19,6 +19,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import net.ymate.payment.alipay.IAliPay;
 import net.ymate.payment.alipay.IAliPayRequestData;
+import org.apache.commons.lang.NullArgumentException;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.HashMap;
@@ -30,7 +31,7 @@ import java.util.Map;
  * @author 刘镇 (suninformation@163.com) on 17/6/8 下午5:05
  * @version 1.0
  */
-public class AliPayTradeWapPayRequestData implements IAliPayRequestData {
+public class TradeWapPayData implements IAliPayRequestData {
 
     /**
      * 对一笔交易的具体描述信息。如果是多种商品，请将商品描述字符串累加传给body
@@ -128,7 +129,16 @@ public class AliPayTradeWapPayRequestData implements IAliPayRequestData {
      */
     private String transMemo;
 
-    public AliPayTradeWapPayRequestData(String outTradeNo, String totalAmount, String subject) {
+    public TradeWapPayData(String outTradeNo, String totalAmount, String subject) {
+        if (StringUtils.isBlank(outTradeNo)) {
+            throw new NullArgumentException("outTradeNo");
+        }
+        if (StringUtils.isBlank(totalAmount)) {
+            throw new NullArgumentException("totalAmount");
+        }
+        if (StringUtils.isBlank(subject)) {
+            throw new NullArgumentException("subject");
+        }
         this.outTradeNo = outTradeNo;
         this.productCode = IAliPay.Const.PROD_CODE_WAP;
         this.totalAmount = totalAmount;

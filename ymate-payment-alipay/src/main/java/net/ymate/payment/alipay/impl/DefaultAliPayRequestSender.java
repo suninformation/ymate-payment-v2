@@ -22,6 +22,8 @@ import net.ymate.payment.alipay.AliPay;
 import net.ymate.payment.alipay.IAliPayReqeustSender;
 import net.ymate.payment.alipay.IAliPayResponse;
 import net.ymate.payment.alipay.IAliPayResponseParser;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +33,8 @@ import java.util.Map;
  * @version 1.0
  */
 public class DefaultAliPayRequestSender<RESPONSE extends IAliPayResponse> implements IAliPayReqeustSender<RESPONSE> {
+
+    private static final Log _LOG = LogFactory.getLog(DefaultAliPayRequestSender.class);
 
     private String gatewayUrl;
 
@@ -61,7 +65,14 @@ public class DefaultAliPayRequestSender<RESPONSE extends IAliPayResponse> implem
 
     public RESPONSE execute() throws Exception {
         IHttpResponse _response = HttpClientHelper.create().post(this.gatewayUrl, this.requestParameters);
-        return this.responseParser.parserResponse(_response);
+        if (_response != null) {
+            if (_response.getStatusCode() == 200) {
+                return this.responseParser.parserResponse(_response.getContent());
+            } else if (_LOG.isDebugEnabled()) {
+                _LOG.debug("ResponseBody: " + _response.toString());
+            }
+        }
+        return null;
     }
 
     public String executeActionForm() {

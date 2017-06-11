@@ -21,8 +21,8 @@ import net.ymate.payment.alipay.IAliPayEventHandler;
 import net.ymate.payment.alipay.base.AliPayAccountMeta;
 import net.ymate.payment.alipay.base.AliPayBaseNotify;
 import net.ymate.payment.alipay.base.AliPayBaseReturn;
-import net.ymate.payment.alipay.request.AliPayTradePagePayRequest;
-import net.ymate.payment.alipay.request.AliPayTradeWapPayRequest;
+import net.ymate.payment.alipay.request.AliPayTradePagePay;
+import net.ymate.payment.alipay.request.AliPayTradeWapPay;
 import net.ymate.platform.core.util.RuntimeUtils;
 import net.ymate.platform.webmvc.annotation.*;
 import net.ymate.platform.webmvc.base.Type;
@@ -45,7 +45,7 @@ public class AliPayController {
         try {
             AliPayAccountMeta _meta = AliPay.get().getModuleCfg().getAccountProvider().getAccount(appId);
             if (_meta != null) {
-                AliPayTradePagePayRequest _request = new AliPayTradePagePayRequest(_meta, AliPay.get().getModuleCfg().getEventHandler().buildTradePagePayRequestData(state, attach));
+                AliPayTradePagePay _request = new AliPayTradePagePay(_meta, AliPay.get().getModuleCfg().getEventHandler().buildTradePagePayRequestData(state, attach));
                 return new HtmlView(_request.build().executeActionForm()).setContentType(Type.ContentType.HTML.getContentType().concat("; charset=").concat(StringUtils.defaultIfBlank(_meta.getCharset(), IAliPay.Const.CHARSET_UTF8)));
             }
         } catch (Exception e) {
@@ -59,7 +59,7 @@ public class AliPayController {
         try {
             AliPayAccountMeta _meta = AliPay.get().getModuleCfg().getAccountProvider().getAccount(appId);
             if (_meta != null) {
-                AliPayTradeWapPayRequest _request = new AliPayTradeWapPayRequest(_meta, AliPay.get().getModuleCfg().getEventHandler().buildTradeWapPayRequestData(state, attach));
+                AliPayTradeWapPay _request = new AliPayTradeWapPay(_meta, AliPay.get().getModuleCfg().getEventHandler().buildTradeWapPayRequestData(state, attach));
                 return new HtmlView(_request.build().executeActionForm()).setContentType(Type.ContentType.HTML.getContentType().concat("; charset=").concat(StringUtils.defaultIfBlank(_meta.getCharset(), IAliPay.Const.CHARSET_UTF8)));
             }
         } catch (Exception e) {
