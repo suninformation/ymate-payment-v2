@@ -33,7 +33,7 @@ import java.util.Map;
  * @author 刘镇 (suninformation@163.com) on 17/6/7 上午9:42
  * @version 1.0
  */
-public class AliPayBaseRequest<DATA extends IAliPayRequestData, RESPONSE extends IAliPayResponse> {
+public class AliPayBaseRequest<DATA extends IAliPayRequestData, RESPONSE extends IAliPayResponse> implements IAliPayRequest<RESPONSE> {
 
     private AliPayAccountMeta accountMeta;
 

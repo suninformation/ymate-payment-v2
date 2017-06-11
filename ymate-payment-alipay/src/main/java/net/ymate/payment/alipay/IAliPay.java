@@ -15,7 +15,10 @@
  */
 package net.ymate.payment.alipay;
 
+import net.ymate.payment.alipay.base.AliPayBaseNotify;
+import net.ymate.payment.alipay.base.AliPayBaseReturn;
 import net.ymate.platform.core.YMP;
+import net.ymate.platform.webmvc.view.IView;
 
 /**
  * @author 刘镇 (suninformation@163.com) on 2017/06/06 下午 17:15
@@ -39,6 +42,33 @@ public interface IAliPay {
      * @return 返回模块是否已初始化
      */
     boolean isInited();
+
+    /**
+     * @param appId   开发者的应用ID
+     * @param orderId 订单Id
+     * @param attach  附加数据
+     * @return PC场景下单并支付
+     * @throws Exception 可能产生的任何异常
+     */
+    IAliPayRequest tradePagePay(String appId, String orderId, String attach) throws Exception;
+
+    /**
+     * @param appId   开发者的应用ID
+     * @param orderId 订单Id
+     * @param attach  附加数据
+     * @return WAP场景下单并支付
+     * @throws Exception 可能产生的任何异常
+     */
+    IAliPayRequest tradeWapPay(String appId, String orderId, String attach) throws Exception;
+
+    /**
+     * @param baseNotify 异步通知对象
+     * @return 处理异步通知并返回回应字符串
+     * @throws Exception 可能产生的任何异常
+     */
+    String onNotify(AliPayBaseNotify baseNotify) throws Exception;
+
+    IView onReturnCallback(AliPayBaseReturn baseReturn) throws Exception;
 
     /**
      * 商户生成签名字符串所使用的签名算法类型
@@ -139,14 +169,6 @@ public interface IAliPay {
 
         String SIGN = "sign";
 
-//        String ACCESS_TOKEN = "auth_token";
-//
-//        String APP_AUTH_TOKEN = "app_auth_token";
-//
-//        String TERMINAL_TYPE = "terminal_type";
-//
-//        String TERMINAL_INFO = "terminal_info";
-
         String CHARSET = "charset";
 
         String NOTIFY_URL = "notify_url";
@@ -166,8 +188,6 @@ public interface IAliPay {
         String CHARSET_GBK = "GBK";
 
         String FORMAT_JSON = "json";
-
-//        String PROD_CODE = "prod_code";
 
         String PROD_CODE_PAGE = "FAST_INSTANT_TRADE_PAY";
 

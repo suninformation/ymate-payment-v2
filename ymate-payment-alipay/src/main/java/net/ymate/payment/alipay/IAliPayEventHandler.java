@@ -33,7 +33,7 @@ public interface IAliPayEventHandler {
      * @return 构建PC端支付请求数据对象
      * @throws Exception 可能产生的任何异常
      */
-    TradePagePayData buildTradePagePayRequestData(String orderId, String attach) throws Exception;
+    TradePagePayData buildTradePagePayData(String orderId, String attach) throws Exception;
 
     /**
      * @param orderId 订单ID
@@ -41,7 +41,7 @@ public interface IAliPayEventHandler {
      * @return 构建PC端支付请求数据对象
      * @throws Exception 可能产生的异常
      */
-    TradeWapPayData buildTradeWapPayRequestData(String orderId, String attach) throws Exception;
+    TradeWapPayData buildTradeWapPayData(String orderId, String attach) throws Exception;
 
     /**
      * 异步支付通知消息到达事件处理方法，该方法的执行过程中若无任何异常被抛出则视为执行成功并向支付宝通知服务返回success字符串

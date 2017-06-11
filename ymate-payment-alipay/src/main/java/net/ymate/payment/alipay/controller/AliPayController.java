@@ -17,19 +17,14 @@ package net.ymate.payment.alipay.controller;
 
 import net.ymate.payment.alipay.AliPay;
 import net.ymate.payment.alipay.IAliPay;
-import net.ymate.payment.alipay.IAliPayEventHandler;
-import net.ymate.payment.alipay.base.AliPayAccountMeta;
+import net.ymate.payment.alipay.IAliPayRequest;
 import net.ymate.payment.alipay.base.AliPayBaseNotify;
 import net.ymate.payment.alipay.base.AliPayBaseReturn;
-import net.ymate.payment.alipay.request.AliPayTradePagePay;
-import net.ymate.payment.alipay.request.AliPayTradeWapPay;
-import net.ymate.platform.core.util.RuntimeUtils;
 import net.ymate.platform.webmvc.annotation.*;
 import net.ymate.platform.webmvc.base.Type;
 import net.ymate.platform.webmvc.view.IView;
 import net.ymate.platform.webmvc.view.View;
 import net.ymate.platform.webmvc.view.impl.HtmlView;
-import net.ymate.platform.webmvc.view.impl.HttpStatusView;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -42,55 +37,33 @@ public class AliPayController {
 
     @RequestMapping(value = "/{app_id}/page", method = {Type.HttpMethod.POST, Type.HttpMethod.GET})
     public IView __pagePay(@PathVariable("app_id") String appId, @RequestParam String state, @RequestParam String attach) throws Exception {
-        try {
-            AliPayAccountMeta _meta = AliPay.get().getModuleCfg().getAccountProvider().getAccount(appId);
-            if (_meta != null) {
-                AliPayTradePagePay _request = new AliPayTradePagePay(_meta, AliPay.get().getModuleCfg().getEventHandler().buildTradePagePayRequestData(state, attach));
-                return new HtmlView(_request.build().executeActionForm()).setContentType(Type.ContentType.HTML.getContentType().concat("; charset=").concat(StringUtils.defaultIfBlank(_meta.getCharset(), IAliPay.Const.CHARSET_UTF8)));
-            }
-        } catch (Exception e) {
-            AliPay.get().getModuleCfg().getEventHandler().onExceptionCaught(RuntimeUtils.unwrapThrow(e));
-        }
-        return HttpStatusView.METHOD_NOT_ALLOWED;
+        IAliPayRequest _request = AliPay.get().tradePagePay(appId, state, attach);
+        return new HtmlView(_request.build().executeActionForm())
+                .setContentType(Type.ContentType.HTML.getContentType()
+                        .concat("; charset=")
+                        .concat(StringUtils.defaultIfBlank(_request.getAccountMeta().getCharset(), IAliPay.Const.CHARSET_UTF8)));
     }
 
     @RequestMapping(value = "/{app_id}/wap", method = {Type.HttpMethod.POST, Type.HttpMethod.GET})
     public IView __wapPay(@PathVariable("app_id") String appId, @RequestParam String state, @RequestParam String attach) throws Exception {
-        try {
-            AliPayAccountMeta _meta = AliPay.get().getModuleCfg().getAccountProvider().getAccount(appId);
-            if (_meta != null) {
-                AliPayTradeWapPay _request = new AliPayTradeWapPay(_meta, AliPay.get().getModuleCfg().getEventHandler().buildTradeWapPayRequestData(state, attach));
-                return new HtmlView(_request.build().executeActionForm()).setContentType(Type.ContentType.HTML.getContentType().concat("; charset=").concat(StringUtils.defaultIfBlank(_meta.getCharset(), IAliPay.Const.CHARSET_UTF8)));
-            }
-        } catch (Exception e) {
-            AliPay.get().getModuleCfg().getEventHandler().onExceptionCaught(RuntimeUtils.unwrapThrow(e));
-        }
-        return HttpStatusView.METHOD_NOT_ALLOWED;
+        IAliPayRequest _request = AliPay.get().tradeWapPay(appId, state, attach);
+        return new HtmlView(_request.build().executeActionForm())
+                .setContentType(Type.ContentType.HTML.getContentType()
+                        .concat("; charset=")
+                        .concat(StringUtils.defaultIfBlank(_request.getAccountMeta().getCharset(), IAliPay.Const.CHARSET_UTF8)));
     }
 
     @RequestMapping(value = "/notify", method = Type.HttpMethod.POST)
     public IView __notify(@ModelBind AliPayBaseNotify baseNotify) throws Exception {
-        IAliPayEventHandler _handler = AliPay.get().getModuleCfg().getEventHandler();
-        try {
-            _handler.onNotifyReceived(baseNotify);
-        } catch (Exception e) {
-            _handler.onExceptionCaught(RuntimeUtils.unwrapThrow(e));
-            return View.textView("fail");
-        }
-        return View.textView("success");
+        return View.textView(AliPay.get().onNotify(baseNotify));
     }
 
     @RequestMapping("/calback")
     public IView __calback(@ModelBind AliPayBaseReturn baseReturn) throws Exception {
-        IAliPayEventHandler _handler = AliPay.get().getModuleCfg().getEventHandler();
-        try {
-            IView _view = _handler.onReturnCallback(baseReturn);
-            if (_view != null) {
-                return _view;
-            }
-        } catch (Exception e) {
-            _handler.onExceptionCaught(RuntimeUtils.unwrapThrow(e));
+        IView _view = AliPay.get().onReturnCallback(baseReturn);
+        if (_view == null) {
+            return View.nullView();
         }
-        return HttpStatusView.METHOD_NOT_ALLOWED;
+        return _view;
     }
 }

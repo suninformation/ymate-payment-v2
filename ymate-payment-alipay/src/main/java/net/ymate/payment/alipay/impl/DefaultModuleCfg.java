@@ -22,6 +22,7 @@ import net.ymate.payment.alipay.IAliPayModuleCfg;
 import net.ymate.payment.alipay.base.AliPayAccountMeta;
 import net.ymate.platform.core.YMP;
 import net.ymate.platform.core.util.ClassUtils;
+import org.apache.commons.lang.NullArgumentException;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.Map;
@@ -43,7 +44,7 @@ public class DefaultModuleCfg implements IAliPayModuleCfg {
         //
         __gatewayUrl = StringUtils.defaultIfBlank(_moduleCfgs.get("gateway_url"), "https://openapi.alipay.com/gateway.do");
         if (!StringUtils.startsWithIgnoreCase(__gatewayUrl, "https://") && !StringUtils.startsWithIgnoreCase(__gatewayUrl, "http://")) {
-            throw new IllegalArgumentException("AliPay gateway address is invalid");
+            throw new IllegalArgumentException("gateway_url address is invalid");
         }
         //
         __accountProvider = ClassUtils.impl(_moduleCfgs.get("account_provider_class"), IAliPayAccountProvider.class, getClass());
@@ -59,6 +60,9 @@ public class DefaultModuleCfg implements IAliPayModuleCfg {
         }
         //
         __eventHandler = ClassUtils.impl(_moduleCfgs.get("event_handler_class"), IAliPayEventHandler.class, getClass());
+        if (__eventHandler == null) {
+            throw new NullArgumentException("event_handler_class");
+        }
     }
 
     public String getGatewayUrl() {

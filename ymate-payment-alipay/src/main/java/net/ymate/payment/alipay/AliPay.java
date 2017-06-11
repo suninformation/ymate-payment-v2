@@ -15,11 +15,18 @@
  */
 package net.ymate.payment.alipay;
 
+import net.ymate.payment.alipay.base.AliPayAccountMeta;
+import net.ymate.payment.alipay.base.AliPayBaseNotify;
+import net.ymate.payment.alipay.base.AliPayBaseReturn;
 import net.ymate.payment.alipay.impl.DefaultModuleCfg;
+import net.ymate.payment.alipay.request.AliPayTradePagePay;
+import net.ymate.payment.alipay.request.AliPayTradeWapPay;
 import net.ymate.platform.core.Version;
 import net.ymate.platform.core.YMP;
 import net.ymate.platform.core.module.IModule;
 import net.ymate.platform.core.module.annotation.Module;
+import net.ymate.platform.core.util.RuntimeUtils;
+import net.ymate.platform.webmvc.view.IView;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -65,7 +72,7 @@ public class AliPay implements IModule, IAliPay {
             __owner = owner;
             __moduleCfg = new DefaultModuleCfg(owner);
             //
-            // Here to write your code
+            __moduleCfg.getAccountProvider().init(this);
             //
             __inited = true;
         }
@@ -75,11 +82,42 @@ public class AliPay implements IModule, IAliPay {
         return __inited;
     }
 
+    public IAliPayRequest tradePagePay(String appId, String orderId, String attach) throws Exception {
+        AliPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
+        if (_meta != null && __moduleCfg.getEventHandler() != null) {
+            return new AliPayTradePagePay(_meta, __moduleCfg.getEventHandler().buildTradePagePayData(orderId, attach));
+        }
+        return null;
+    }
+
+    public IAliPayRequest tradeWapPay(String appId, String orderId, String attach) throws Exception {
+        AliPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
+        if (_meta != null && __moduleCfg.getEventHandler() != null) {
+            return new AliPayTradeWapPay(_meta, __moduleCfg.getEventHandler().buildTradeWapPayData(orderId, attach));
+        }
+        return null;
+    }
+
+    public String onNotify(AliPayBaseNotify baseNotify) throws Exception {
+        IAliPayEventHandler _handler = __moduleCfg.getEventHandler();
+        try {
+            _handler.onNotifyReceived(baseNotify);
+        } catch (Exception e) {
+            _handler.onExceptionCaught(RuntimeUtils.unwrapThrow(e));
+            return "fail";
+        }
+        return "success";
+    }
+
+    public IView onReturnCallback(AliPayBaseReturn baseReturn) throws Exception {
+        return __moduleCfg.getEventHandler().onReturnCallback(baseReturn);
+    }
+
     public void destroy() throws Exception {
         if (__inited) {
             __inited = false;
             //
-            // Here to write your code
+            __moduleCfg.getAccountProvider().destroy();
             //
             __moduleCfg = null;
             __owner = null;
