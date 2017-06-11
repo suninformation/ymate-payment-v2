@@ -46,7 +46,7 @@ public class AliPayTradeQuery extends AliPayBaseRequest<TradeQueryData, AliPayTr
     private static final String METHOD_NAME = "alipay.trade.query";
 
     public AliPayTradeQuery(AliPayAccountMeta accountMeta, TradeQueryData bizContent) {
-        super(accountMeta, METHOD_NAME, "1.0", bizContent, false, new AliPayBaseResponseParser<AliPayTradeQuery.Response>(METHOD_NAME));
+        super(accountMeta, METHOD_NAME, "1.0", bizContent, false, false, new AliPayBaseResponseParser<AliPayTradeQuery.Response>(METHOD_NAME));
     }
 
     /**

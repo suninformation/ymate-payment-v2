@@ -30,6 +30,6 @@ import net.ymate.payment.alipay.data.TradeWapPayData;
 public class AliPayTradeWapPay extends AliPayBaseRequest<TradeWapPayData, IAliPayResponse.NOTHING> {
 
     public AliPayTradeWapPay(AliPayAccountMeta accountMeta, TradeWapPayData bizContent) {
-        super(accountMeta, "alipay.trade.wap.pay", "1.0", bizContent, true, new IAliPayResponseParser.NOTHING());
+        super(accountMeta, "alipay.trade.wap.pay", "1.0", bizContent, true, true, new IAliPayResponseParser.NOTHING());
     }
 }

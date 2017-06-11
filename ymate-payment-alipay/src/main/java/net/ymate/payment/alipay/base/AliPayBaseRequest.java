@@ -47,7 +47,9 @@ public class AliPayBaseRequest<DATA extends IAliPayRequestData, RESPONSE extends
 
     private boolean needNotify;
 
-    public AliPayBaseRequest(AliPayAccountMeta accountMeta, String method, String version, DATA bizContent, boolean needNotify, IAliPayResponseParser<RESPONSE> responseParser) {
+    private boolean needReturn;
+
+    public AliPayBaseRequest(AliPayAccountMeta accountMeta, String method, String version, DATA bizContent, boolean needNotify, boolean needReturn, IAliPayResponseParser<RESPONSE> responseParser) {
         if (accountMeta == null) {
             throw new NullArgumentException("accountMeta");
         }
@@ -67,6 +69,7 @@ public class AliPayBaseRequest<DATA extends IAliPayRequestData, RESPONSE extends
         this.bizContent = bizContent;
         //
         this.needNotify = needNotify;
+        this.needReturn = needReturn;
         //
         this.responseParser = responseParser;
     }
@@ -85,11 +88,13 @@ public class AliPayBaseRequest<DATA extends IAliPayRequestData, RESPONSE extends
         _params.put(IAliPay.Const.VERSION, version);
         //
         if (needNotify) {
-            if (StringUtils.isNotBlank(accountMeta.getReturnUrl())) {
-                _params.put(IAliPay.Const.RETURN_URL, accountMeta.getReturnUrl());
-            }
             if (StringUtils.isNotBlank(accountMeta.getNotifyUrl())) {
                 _params.put(IAliPay.Const.NOTIFY_URL, accountMeta.getNotifyUrl());
+            }
+        }
+        if (needReturn) {
+            if (StringUtils.isNotBlank(accountMeta.getReturnUrl())) {
+                _params.put(IAliPay.Const.RETURN_URL, accountMeta.getReturnUrl());
             }
         }
         //

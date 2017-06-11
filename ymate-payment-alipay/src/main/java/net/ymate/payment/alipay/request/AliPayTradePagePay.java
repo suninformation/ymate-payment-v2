@@ -30,6 +30,6 @@ import net.ymate.payment.alipay.data.TradePagePayData;
 public class AliPayTradePagePay extends AliPayBaseRequest<TradePagePayData, IAliPayResponse.NOTHING> {
 
     public AliPayTradePagePay(AliPayAccountMeta accountMeta, TradePagePayData bizContent) {
-        super(accountMeta, "alipay.trade.page.pay", "1.0", bizContent, true, new IAliPayResponseParser.NOTHING());
+        super(accountMeta, "alipay.trade.page.pay", "1.0", bizContent, true, true, new IAliPayResponseParser.NOTHING());
     }
 }

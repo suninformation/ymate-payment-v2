@@ -41,7 +41,7 @@ public class AliPayTradeRefund extends AliPayBaseRequest<TradeRefundData, AliPay
     private static final String METHOD_NAME = "alipay.trade.refund";
 
     public AliPayTradeRefund(AliPayAccountMeta accountMeta, TradeRefundData bizContent) {
-        super(accountMeta, METHOD_NAME, "1.0", bizContent, false, new AliPayBaseResponseParser<Response>(METHOD_NAME));
+        super(accountMeta, METHOD_NAME, "1.0", bizContent, false, false, new AliPayBaseResponseParser<Response>(METHOD_NAME));
     }
 
     /**

@@ -35,7 +35,7 @@ public class AliPayTradeClose extends AliPayBaseRequest<TradeCloseData, AliPayTr
     private static final String METHOD_NAME = "alipay.trade.close";
 
     public AliPayTradeClose(AliPayAccountMeta accountMeta, TradeCloseData bizContent) {
-        super(accountMeta, METHOD_NAME, "1.0", bizContent, false, new AliPayBaseResponseParser<AliPayTradeClose.Response>(METHOD_NAME));
+        super(accountMeta, METHOD_NAME, "1.0", bizContent, true, false, new AliPayBaseResponseParser<AliPayTradeClose.Response>(METHOD_NAME));
     }
 
     /**
