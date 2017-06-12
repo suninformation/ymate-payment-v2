@@ -39,7 +39,7 @@ public class AliPayTradeRefundQuery extends AliPayBaseRequest<TradeRefundQueryDa
     private static final String METHOD_NAME = "alipay.trade.fastpay.refund.query";
 
     public AliPayTradeRefundQuery(AliPayAccountMeta accountMeta, TradeRefundQueryData bizContent) {
-        super(accountMeta, METHOD_NAME, "1.0", bizContent, false, false, new AliPayBaseResponseParser<AliPayTradeRefundQuery.Response>(METHOD_NAME));
+        super(accountMeta, METHOD_NAME, "1.0", bizContent, false, false, new AliPayBaseResponseParser<Response>(Response.class, METHOD_NAME));
     }
 
     /**

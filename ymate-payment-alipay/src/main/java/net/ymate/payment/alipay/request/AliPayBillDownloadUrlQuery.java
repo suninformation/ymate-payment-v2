@@ -35,7 +35,7 @@ public class AliPayBillDownloadUrlQuery extends AliPayBaseRequest<BillDownloadUr
     private static final String METHOD_NAME = "alipay.data.dataservice.bill.downloadurl.query";
 
     public AliPayBillDownloadUrlQuery(AliPayAccountMeta accountMeta, BillDownloadUrlQueryData bizContent) {
-        super(accountMeta, METHOD_NAME, "1.0", bizContent, false, false, new AliPayBaseResponseParser<AliPayBillDownloadUrlQuery.Response>(METHOD_NAME));
+        super(accountMeta, METHOD_NAME, "1.0", bizContent, false, false, new AliPayBaseResponseParser<Response>(Response.class, METHOD_NAME));
     }
 
     /**

@@ -38,10 +38,14 @@ public class AliPayBaseResponseParser<RESPONSE extends IAliPayResponse> implemen
 
     private Class<? extends RESPONSE> __class;
 
-    public AliPayBaseResponseParser(String methodName) {
+    public AliPayBaseResponseParser(Class<? extends RESPONSE> clazz, String methodName) {
+        if (clazz == null) {
+            throw new NullArgumentException("clazz");
+        }
         if (StringUtils.isBlank(methodName)) {
             throw new NullArgumentException("methodName");
         }
+        __class = clazz;
         __methodName = StringUtils.replace(methodName, ".", "_") + IAliPay.Const.RESPONSE_SUFFIX;
     }
 
