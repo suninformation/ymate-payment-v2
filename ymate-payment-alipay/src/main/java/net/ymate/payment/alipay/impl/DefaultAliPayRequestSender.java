@@ -18,10 +18,8 @@ package net.ymate.payment.alipay.impl;
 import net.ymate.framework.commons.HttpClientHelper;
 import net.ymate.framework.commons.IHttpResponse;
 import net.ymate.framework.commons.ParamUtils;
-import net.ymate.payment.alipay.AliPay;
-import net.ymate.payment.alipay.IAliPayReqeustSender;
-import net.ymate.payment.alipay.IAliPayResponse;
-import net.ymate.payment.alipay.IAliPayResponseParser;
+import net.ymate.payment.alipay.*;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -76,6 +74,13 @@ public class DefaultAliPayRequestSender<RESPONSE extends IAliPayResponse> implem
     }
 
     public String executeActionForm() {
+        // 此处在网关URL地址中添加字符集配置参数，主要为解决中文乱码问题
+        if (!StringUtils.containsIgnoreCase(this.gatewayUrl, "charset=")) {
+            Map<String, String> _params = new HashMap<String, String>();
+            _params.put(IAliPay.Const.CHARSET, charset);
+            //
+            this.gatewayUrl = ParamUtils.appendQueryParamValue(this.gatewayUrl, _params, false, null);
+        }
         return ParamUtils.buildActionForm(this.gatewayUrl, true, false, true, charset, requestParameters);
     }
 }
