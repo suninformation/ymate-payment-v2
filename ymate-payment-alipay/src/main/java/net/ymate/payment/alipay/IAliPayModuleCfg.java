@@ -35,4 +35,9 @@ public interface IAliPayModuleCfg {
      * @return 支付事件处理器
      */
     IAliPayEventHandler getEventHandler();
+
+    /**
+     * @return 默认支付宝开发者帐户ID, 默认值: 若采用账户提供者接口默认实现时取值默认应用ID, 否则为空
+     */
+    String getDefaultAccountId();
 }

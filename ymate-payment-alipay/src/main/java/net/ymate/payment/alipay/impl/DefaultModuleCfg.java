@@ -39,6 +39,8 @@ public class DefaultModuleCfg implements IAliPayModuleCfg {
 
     private IAliPayEventHandler __eventHandler;
 
+    private String __defaultAccountId;
+
     public DefaultModuleCfg(YMP owner) {
         Map<String, String> _moduleCfgs = owner.getConfig().getModuleConfigs(IAliPay.MODULE_NAME);
         //
@@ -56,7 +58,11 @@ public class DefaultModuleCfg implements IAliPayModuleCfg {
             _meta.setFormat(StringUtils.defaultIfBlank(_moduleCfgs.get(IAliPay.Const.FORMAT), IAliPay.Const.FORMAT_JSON));
             _meta.setNotifyUrl(StringUtils.trimToNull(_moduleCfgs.get(IAliPay.Const.NOTIFY_URL)));
             _meta.setReturnUrl(StringUtils.trimToNull(_moduleCfgs.get(IAliPay.Const.RETURN_URL)));
+            //
+            __defaultAccountId = _meta.getAppId();
             __accountProvider.registerAccount(_meta);
+        } else {
+            __defaultAccountId = StringUtils.trimToNull(_moduleCfgs.get("default_account_id"));
         }
         //
         __eventHandler = ClassUtils.impl(_moduleCfgs.get("event_handler_class"), IAliPayEventHandler.class, getClass());
@@ -75,5 +81,9 @@ public class DefaultModuleCfg implements IAliPayModuleCfg {
 
     public IAliPayEventHandler getEventHandler() {
         return __eventHandler;
+    }
+
+    public String getDefaultAccountId() {
+        return __defaultAccountId;
     }
 }

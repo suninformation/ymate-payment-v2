@@ -18,6 +18,7 @@ package net.ymate.payment.alipay.impl;
 import net.ymate.payment.alipay.IAliPay;
 import net.ymate.payment.alipay.IAliPayAccountProvider;
 import net.ymate.payment.alipay.base.AliPayAccountMeta;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.Collection;
 import java.util.Map;
@@ -31,7 +32,10 @@ public class DefaultAliPayAccountProvider implements IAliPayAccountProvider {
 
     private static Map<String, AliPayAccountMeta> __CACHES = new ConcurrentHashMap<String, AliPayAccountMeta>();
 
+    private IAliPay __owner;
+
     public void init(IAliPay owner) throws Exception {
+        __owner = owner;
     }
 
     public void destroy() throws Exception {
@@ -54,6 +58,9 @@ public class DefaultAliPayAccountProvider implements IAliPayAccountProvider {
     }
 
     public AliPayAccountMeta getAccount(String accountId) {
+        if (StringUtils.equalsIgnoreCase(accountId, "default")) {
+            return __CACHES.get(__owner.getModuleCfg().getDefaultAccountId());
+        }
         return __CACHES.get(accountId);
     }
 }
