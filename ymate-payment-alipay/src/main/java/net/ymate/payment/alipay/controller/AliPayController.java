@@ -58,8 +58,8 @@ public class AliPayController {
         return View.textView(AliPay.get().onNotify(baseNotify));
     }
 
-    @RequestMapping("/calback")
-    public IView __calback(@ModelBind AliPayBaseReturn baseReturn) throws Exception {
+    @RequestMapping("/callback")
+    public IView __callback(@ModelBind AliPayBaseReturn baseReturn) throws Exception {
         IView _view = AliPay.get().onReturnCallback(baseReturn);
         if (_view == null) {
             return View.nullView();
