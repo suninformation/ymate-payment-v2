@@ -23,11 +23,13 @@ import net.ymate.payment.alipay.base.AliPayBaseReturn;
 import net.ymate.payment.alipay.intercept.AliPaySignatureCheckInterceptor;
 import net.ymate.platform.core.beans.annotation.Before;
 import net.ymate.platform.core.beans.annotation.Clean;
+import net.ymate.platform.validation.validate.VRequried;
 import net.ymate.platform.webmvc.annotation.*;
 import net.ymate.platform.webmvc.base.Type;
 import net.ymate.platform.webmvc.view.IView;
 import net.ymate.platform.webmvc.view.View;
 import net.ymate.platform.webmvc.view.impl.HtmlView;
+import net.ymate.platform.webmvc.view.impl.HttpStatusView;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -39,9 +41,16 @@ import org.apache.commons.lang.StringUtils;
 @Before(AliPaySignatureCheckInterceptor.class)
 public class AliPayController {
 
+    /**
+     * @param appId  开发者应用ID
+     * @param state  订单编号
+     * @param attach 附加信息
+     * @return 跳转到PC端支付
+     * @throws Exception 可能产生的任何异常
+     */
     @RequestMapping(value = "/{app_id}/page", method = {Type.HttpMethod.POST, Type.HttpMethod.GET})
     @Clean
-    public IView __pagePay(@PathVariable("app_id") String appId, @RequestParam String state, @RequestParam String attach) throws Exception {
+    public IView __pagePay(@PathVariable("app_id") String appId, @VRequried @RequestParam String state, @RequestParam String attach) throws Exception {
         IAliPayRequest _request = AliPay.get().tradePagePay(appId, state, attach);
         return new HtmlView(_request.build().executeActionForm())
                 .setContentType(Type.ContentType.HTML.getContentType()
@@ -51,7 +60,7 @@ public class AliPayController {
 
     @RequestMapping(value = "/{app_id}/wap", method = {Type.HttpMethod.POST, Type.HttpMethod.GET})
     @Clean
-    public IView __wapPay(@PathVariable("app_id") String appId, @RequestParam String state, @RequestParam String attach) throws Exception {
+    public IView __wapPay(@PathVariable("app_id") String appId, @VRequried @RequestParam String state, @RequestParam String attach) throws Exception {
         IAliPayRequest _request = AliPay.get().tradeWapPay(appId, state, attach);
         return new HtmlView(_request.build().executeActionForm())
                 .setContentType(Type.ContentType.HTML.getContentType()
@@ -68,7 +77,7 @@ public class AliPayController {
     public IView __callback(@ModelBind AliPayBaseReturn baseReturn) throws Exception {
         IView _view = AliPay.get().onReturnCallback(baseReturn);
         if (_view == null) {
-            return View.nullView();
+            return HttpStatusView.METHOD_NOT_ALLOWED;
         }
         return _view;
     }

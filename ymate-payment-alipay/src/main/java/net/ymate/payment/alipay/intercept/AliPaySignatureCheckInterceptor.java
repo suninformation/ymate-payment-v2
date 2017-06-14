@@ -26,6 +26,8 @@ import net.ymate.platform.webmvc.context.WebContext;
 import net.ymate.platform.webmvc.view.IView;
 import net.ymate.platform.webmvc.view.impl.HttpStatusView;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,10 +40,14 @@ import java.util.Map;
  */
 public class AliPaySignatureCheckInterceptor implements IInterceptor {
 
+    private static final Log _LOG = LogFactory.getLog(AliPaySignatureCheckInterceptor.class);
+
     public Object intercept(InterceptContext context) throws Exception {
-        switch (context.getDirection()) {
-            case BEFORE:
-                return __doSignCheck(context);
+        if (!AliPay.get().getModuleCfg().isSignCheckDisabled()) {
+            switch (context.getDirection()) {
+                case BEFORE:
+                    return __doSignCheck(context);
+            }
         }
         return null;
     }
@@ -60,6 +66,8 @@ public class AliPaySignatureCheckInterceptor implements IInterceptor {
                 String _paramsStr = ParamUtils.buildQueryParamStr(_params, false, _meta.getCharset());
                 if (SignatureUtils.verify(_paramsStr, _sign, _meta.getPublicKey(), _meta.getCharset(), _meta.getSignType())) {
                     return null;
+                } else if (_LOG.isDebugEnabled()) {
+                    _LOG.debug("Signature verification failed: " + _paramsStr);
                 }
             }
         }

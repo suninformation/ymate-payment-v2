@@ -21,6 +21,7 @@ import net.ymate.payment.alipay.IAliPayEventHandler;
 import net.ymate.payment.alipay.IAliPayModuleCfg;
 import net.ymate.payment.alipay.base.AliPayAccountMeta;
 import net.ymate.platform.core.YMP;
+import net.ymate.platform.core.lang.BlurObject;
 import net.ymate.platform.core.util.ClassUtils;
 import org.apache.commons.lang.NullArgumentException;
 import org.apache.commons.lang.StringUtils;
@@ -40,6 +41,8 @@ public class DefaultModuleCfg implements IAliPayModuleCfg {
     private IAliPayEventHandler __eventHandler;
 
     private String __defaultAccountId;
+
+    private boolean __signCheckDisabled;
 
     public DefaultModuleCfg(YMP owner) {
         Map<String, String> _moduleCfgs = owner.getConfig().getModuleConfigs(IAliPay.MODULE_NAME);
@@ -69,6 +72,8 @@ public class DefaultModuleCfg implements IAliPayModuleCfg {
         if (__eventHandler == null) {
             throw new NullArgumentException("event_handler_class");
         }
+        //
+        __signCheckDisabled = BlurObject.bind(_moduleCfgs.get("sign_check_disabled")).toBooleanValue();
     }
 
     public String getGatewayUrl() {
@@ -85,5 +90,9 @@ public class DefaultModuleCfg implements IAliPayModuleCfg {
 
     public String getDefaultAccountId() {
         return __defaultAccountId;
+    }
+
+    public boolean isSignCheckDisabled() {
+        return __signCheckDisabled;
     }
 }

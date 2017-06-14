@@ -32,7 +32,7 @@ public class SignatureUtils {
 
     private static CodecUtils.RSACodecHelper __SHA1WithRSA = new CodecUtils.RSACodecHelper(1024, IAliPay.Const.SIGN_ALGORITHMS);
 
-    private static CodecUtils.RSACodecHelper __SHA256WithRSA = new CodecUtils.RSACodecHelper(1024, IAliPay.Const.SIGN_SHA256RSA_ALGORITHMS);
+    private static CodecUtils.RSACodecHelper __SHA256WithRSA = new CodecUtils.RSACodecHelper(2048, IAliPay.Const.SIGN_SHA256RSA_ALGORITHMS);
 
     /**
      * @param content    待签名内容

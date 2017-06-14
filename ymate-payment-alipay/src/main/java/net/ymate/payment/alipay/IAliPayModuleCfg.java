@@ -40,4 +40,9 @@ public interface IAliPayModuleCfg {
      * @return 默认支付宝开发者帐户ID, 默认值: 若采用账户提供者接口默认实现时取值默认应用ID, 否则为空
      */
     String getDefaultAccountId();
+
+    /**
+     * @return 禁用报文签名验证(验签), 默认值: false
+     */
+    boolean isSignCheckDisabled();
 }
