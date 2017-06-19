@@ -10,13 +10,13 @@
         <version>1</version>
     </parent>
 
-    <artifactId>ymate-payment-alipay</artifactId>
+    <artifactId>ymate-payment-wxpay</artifactId>
     <version>2.0.0</version>
     <packaging>jar</packaging>
 
-    <name>ymate-payment-alipay</name>
+    <name>ymate-payment-wxpay</name>
     <url>http://www.ymate.net/</url>
-    <description>AliPay Module for YMP</description>
+    <description>WeChat Pay Module for YMP</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -40,7 +40,7 @@
                         <archive>
                             <manifestSections>
                                 <manifestSection>
-                                    <name>net/ymate/payment/alipay/</name>
+                                    <name>net/ymate/payment/wxpay</name>
                                 </manifestSection>
                             </manifestSections>
                             <manifestEntries>
@@ -101,6 +101,10 @@
             <artifactId>httpmime</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+        </dependency>
+        <dependency>
             <groupId>net.ymate.platform</groupId>
             <artifactId>ymate-platform-core</artifactId>
         </dependency>
@@ -111,6 +115,14 @@
         <dependency>
             <groupId>net.ymate.framework</groupId>
             <artifactId>ymate-framework-commons</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.ymate.framework</groupId>
+            <artifactId>ymate-framework-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.ymate.framework</groupId>
+            <artifactId>ymate-framework-unpack</artifactId>
         </dependency>
     </dependencies>
 </project>

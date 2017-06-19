@@ -5,7 +5,7 @@
 |名称|状态|
 |---|---|
 |支付宝|测试通过|
-|微信支付|整理中|
+|微信支付|重构完成, 待测试|
 |银联支付|整理中|；
 
 #### 支付宝 (AliPay)
@@ -213,6 +213,16 @@ ymp.configs.payment.alipay.return_url=
 ```
 
 #### 微信支付 (WxPay)
+
+##### Maven包依赖
+
+```
+<dependency>
+    <groupId>net.ymate.payment</groupId>
+    <artifactId>ymate-payment-wxpay</artifactId>
+    <version>2.0.0</version>
+</dependency>
+```
 
 > 正在整理中...，请稍后!
 
