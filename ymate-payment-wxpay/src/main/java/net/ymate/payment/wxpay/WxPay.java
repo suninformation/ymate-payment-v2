@@ -67,6 +67,8 @@ public class WxPay implements IModule, IWxPay {
             __owner = owner;
             __moduleCfg = new DefaultModuleCfg(owner);
             //
+            __moduleCfg.getAccountProvider().init(this);
+            //
             __inited = true;
         }
     }
@@ -174,6 +176,8 @@ public class WxPay implements IModule, IWxPay {
     public void destroy() throws Exception {
         if (__inited) {
             __inited = false;
+            //
+            this.__moduleCfg.getAccountProvider().destroy();
             //
             __moduleCfg = null;
             __owner = null;
