@@ -72,24 +72,33 @@ public class WxPayNativeController {
                 _paramMap.put("sign", WxPayBaseData.__doCreateSignature(_paramMap, _meta.getMchKey()));
                 //
                 String _qrCodeData = WebUtils.encryptStr(WebContext.getRequest(), "weixin://wxpay/bizpayurl?".concat(ParamUtils.buildQueryParamStr(_paramMap, false, null)));
-                return View.jspView(WxPay.get().getModuleCfg().getNativeView()).addAttribute("qrcode_data", _qrCodeData).addAttribute("state", state).addAttribute("attach", attach);
+                return View.jspView(WxPay.get().getModuleCfg().getNativeView())
+                        .addAttribute("_qrcode_data", _qrCodeData)
+                        .addAttribute("_state", state)
+                        .addAttribute("_attach", attach).addAttribute("_app_id", appId);
             }
         }
         return HttpStatusView.bind(HttpServletResponse.SC_BAD_REQUEST);
     }
 
     @RequestMapping(value = "{app_id}/native/dynamic", method = {Type.HttpMethod.GET, Type.HttpMethod.POST})
-    public IView __doNativeDynamic(@PathVariable("app_id") String appId, @VRequried @RequestParam String openId, @VRequried @RequestParam String state, @RequestParam String attach) throws Exception {
+    public IView __doNativeDynamic(@PathVariable("app_id") String appId,
+                                   @VRequried @RequestParam("open_id") String openId,
+                                   @VRequried @RequestParam String state,
+                                   @RequestParam String attach) throws Exception {
         IWxPayEventHandler _eventHandler = WxPay.get().getModuleCfg().getEventHandler();
         if (_eventHandler != null) {
             WxPayAccountMeta _meta = WxPay.get().getModuleCfg().getAccountProvider().getAccount(appId);
             if (_meta != null) {
-                WxPayUnifiedOrder _request = _eventHandler.buildUnifiedOrderRequest(IWxPay.TradeType.NATIVE, state, attach).openId(openId);
+                WxPayUnifiedOrder _request = _eventHandler.buildUnifiedOrderRequest(_meta, IWxPay.TradeType.NATIVE, state, attach).openId(openId);
                 WxPayUnifiedOrder.Response _response = _request.execute();
                 //
                 if (_response.checkReturnCode() && _response.checkResultCode() && _response.checkSignature(_meta.getMchKey())) {
                     String _qrCodeData = WebUtils.encryptStr(WebContext.getRequest(), _response.codeUrl());
-                    return View.jspView(WxPay.get().getModuleCfg().getNativeView()).addAttribute("qrcode_data", _qrCodeData).addAttribute("state", state).addAttribute("attach", attach);
+                    return View.jspView(WxPay.get().getModuleCfg().getNativeView())
+                            .addAttribute("_qrcode_data", _qrCodeData)
+                            .addAttribute("_state", state)
+                            .addAttribute("_attach", attach).addAttribute("_app_id", appId);
                 }
             }
         }

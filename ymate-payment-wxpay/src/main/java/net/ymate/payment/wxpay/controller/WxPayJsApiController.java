@@ -76,7 +76,7 @@ public class WxPayJsApiController {
         if (_eventHandler != null) {
             WxPayAccountMeta _meta = WxPay.get().getModuleCfg().getAccountProvider().getAccount(appId);
             if (_meta != null) {
-                WxPayUnifiedOrder _request = _eventHandler.buildUnifiedOrderRequest(IWxPay.TradeType.JSAPI, state, attach).openId(openId);
+                WxPayUnifiedOrder _request = _eventHandler.buildUnifiedOrderRequest(_meta, IWxPay.TradeType.JSAPI, state, attach).openId(openId);
                 WxPayUnifiedOrder.Response _response = _request.execute();
                 //
                 if (_response.checkReturnCode() && _response.checkResultCode() && _response.checkSignature(_meta.getMchKey())) {
@@ -94,7 +94,10 @@ public class WxPayJsApiController {
                     _paramMap.put("signType", IWxPay.Const.SIGN_TYPE_MD5);
                     _paramMap.put("paySign", WxPayBaseData.__doCreateSignature(_paramMap, _meta.getMchKey()));
                     //
-                    return View.jspView(WxPay.get().getModuleCfg().getJsApiView()).addAttribute("_config", _config).addAttribute("_data", _paramMap).addAttribute("_trade_no", state);
+                    return View.jspView(WxPay.get().getModuleCfg().getJsApiView())
+                            .addAttribute("_config", _config)
+                            .addAttribute("_data", _paramMap)
+                            .addAttribute("_trade_no", state).addAttribute("_app_id", appId);
                 }
             }
         }

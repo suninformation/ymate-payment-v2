@@ -42,7 +42,9 @@ public class WxPayQRCodeController {
      * @throws Exception 可能产生的任何异常
      */
     @RequestMapping("/qrcode/{data}")
-    public IView __showQrCode(@PathVariable String data, @VLength(max = 300) @RequestParam(defaultValue = "300") Integer width, @VLength(max = 300) @RequestParam(defaultValue = "300") Integer height) throws Exception {
+    public IView __showQrCode(@PathVariable String data,
+                              @VLength(max = 300) @RequestParam(defaultValue = "300") Integer width,
+                              @VLength(max = 300) @RequestParam(defaultValue = "300") Integer height) throws Exception {
         String _qrContent = WebUtils.decryptStr(WebContext.getRequest(), data);
         QRCodeHelper.create(_qrContent, width, height).writeToStream(WebContext.getResponse().getOutputStream());
         return new NullView();

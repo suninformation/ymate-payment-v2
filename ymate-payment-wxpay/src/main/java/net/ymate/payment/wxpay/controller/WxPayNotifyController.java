@@ -69,7 +69,7 @@ public class WxPayNotifyController {
                 try {
                     if (!WxPay.get().getModuleCfg().isSignCheckDisabled() || notify.checkSignature(_meta.getMchKey())) {
                         if (StringUtils.isNotBlank(notify.productId())) {
-                            WxPayUnifiedOrder _request = _eventHandler.buildUnifiedOrderRequest(IWxPay.TradeType.NATIVE, notify.productId(), notify.attach());
+                            WxPayUnifiedOrder _request = _eventHandler.buildUnifiedOrderRequest(_meta, IWxPay.TradeType.NATIVE, notify.productId(), notify.attach());
                             WxPayUnifiedOrder.Response _response = _request.execute();
                             if (_response.checkReturnCode() && _response.checkResultCode()) {
                                 if (_response.checkSignature(_meta.getMchKey())) {
