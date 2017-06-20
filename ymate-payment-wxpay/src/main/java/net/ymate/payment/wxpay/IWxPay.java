@@ -173,6 +173,35 @@ public interface IWxPay {
     WxPayShortUrl shortUrl(String appId, String longUrl) throws Exception;
 
     /**
+     * @param appId          公众账号ID
+     * @param body           商品描述
+     * @param outTradeNo     商户订单号
+     * @param totalFee       总金额
+     * @param spbillCreateIp 终端IP
+     * @param authCode       授权码
+     * @return 提交刷卡支付
+     * @throws Exception 可能产生的任何异常
+     */
+    WxPayMicroPay microPay(String appId, String body, String outTradeNo, Integer totalFee, String spbillCreateIp, String authCode) throws Exception;
+
+    /**
+     * @param appId         公众账号ID
+     * @param transactionId 微信订单号
+     * @param outTradeNo    商户订单号
+     * @return 撤销订单
+     * @throws Exception 可能产生的任何异常
+     */
+    WxPayReverse reverse(String appId, String transactionId, String outTradeNo) throws Exception;
+
+    /**
+     * @param appId    公众账号ID
+     * @param authCode 授权码
+     * @return 授权码查询openid
+     * @throws Exception 可能产生的任何异常
+     */
+    WxPayAuthCodeToOpenId authCodeToOpenId(String appId, String authCode) throws Exception;
+
+    /**
      * 账单类型
      */
     enum BillType {
@@ -236,7 +265,16 @@ public interface IWxPay {
         TRADE_OVERDUE("订单已经超过退款期限"),
         USER_ACCOUNT_ABNORMAL("退款请求失败"),
         INVALID_REQ_TOO_MUCH("无效请求过多"),
-        FREQUENCY_LIMITED("频率限制");
+        FREQUENCY_LIMITED("频率限制"),
+        //
+        AUTHCODEEXPIRE("二维码已过期，请用户在微信上刷新后再试"),
+        NOTSUPORTCARD("不支持卡类型"),
+        ORDERREVERSED("订单已撤销"),
+        BANKERROR("银行系统异常"),
+        USERPAYING("用户支付中，需要输入密码"),
+        AUTH_CODE_ERROR("授权码参数错误"),
+        AUTH_CODE_INVALID("授权码检验错误"),
+        BUYER_MISMATCH("支付帐号错误");
 
         private String desc;
 

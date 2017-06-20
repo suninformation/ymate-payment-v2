@@ -173,6 +173,30 @@ public class WxPay implements IModule, IWxPay {
         return null;
     }
 
+    public WxPayMicroPay microPay(String appId, String body, String outTradeNo, Integer totalFee, String spbillCreateIp, String authCode) throws Exception {
+        WxPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
+        if (_meta != null) {
+            return new WxPayMicroPay(_meta, body, outTradeNo, totalFee, spbillCreateIp, authCode);
+        }
+        return null;
+    }
+
+    public WxPayReverse reverse(String appId, String transactionId, String outTradeNo) throws Exception {
+        WxPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
+        if (_meta != null) {
+            return new WxPayReverse(_meta, transactionId, outTradeNo);
+        }
+        return null;
+    }
+
+    public WxPayAuthCodeToOpenId authCodeToOpenId(String appId, String authCode) throws Exception {
+        WxPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
+        if (_meta != null) {
+            return new WxPayAuthCodeToOpenId(_meta, authCode);
+        }
+        return null;
+    }
+
     public void destroy() throws Exception {
         if (__inited) {
             __inited = false;

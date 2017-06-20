@@ -338,7 +338,7 @@ public class WxPayUnifiedOrder extends WxPayBaseRequest<WxPayUnifiedOrder.Respon
     /**
      * 统一下单响应
      */
-    public class Response extends WxPayBaseResponse {
+    public static class Response extends WxPayBaseResponse {
 
         /**
          * 公众账号ID
