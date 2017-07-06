@@ -103,6 +103,7 @@ public class WxPayMicroPay extends WxPayBaseRequest<WxPayMicroPay.Response> {
 
     public WxPayMicroPay(WxPayAccountMeta accountMeta, String body, String outTradeNo, Integer totalFee, String spbillCreateIp, String authCode) {
         super(accountMeta);
+        this.appId = accountMeta.getAppId();
         this.body = body;
         this.outTradeNo = outTradeNo;
         this.totalFee = totalFee;

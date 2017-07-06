@@ -121,6 +121,7 @@ public class WxPayUnifiedOrder extends WxPayBaseRequest<WxPayUnifiedOrder.Respon
 
     public WxPayUnifiedOrder(WxPayAccountMeta accountMeta, String body, String outTradeNo, Integer totalFee, String spbillCreateIp, String notifyUrl, String tradeType) {
         super(accountMeta);
+        this.appId = accountMeta.getAppId();
         this.body = body;
         this.outTradeNo = outTradeNo;
         this.totalFee = totalFee;
