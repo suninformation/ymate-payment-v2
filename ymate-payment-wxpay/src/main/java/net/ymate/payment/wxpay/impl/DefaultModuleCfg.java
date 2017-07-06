@@ -53,7 +53,7 @@ public class DefaultModuleCfg implements IWxPayModuleCfg {
         if (__accountProvider == null) {
             __accountProvider = new DefaultWxPayAccountProvider();
             //
-            WxPayAccountMeta _meta = new WxPayAccountMeta(_moduleCfgs.get(IWxPay.Const.APP_ID),
+            WxPayAccountMeta _meta = new WxPayAccountMeta(_moduleCfgs.get("app_id"),
                     _moduleCfgs.get(IWxPay.Const.MCH_ID),
                     _moduleCfgs.get(IWxPay.Const.MCH_KEY),
                     _moduleCfgs.get("cert_file_path"),
