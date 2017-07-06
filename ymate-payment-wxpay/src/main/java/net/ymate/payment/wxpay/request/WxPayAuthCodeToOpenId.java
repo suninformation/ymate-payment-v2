@@ -84,7 +84,7 @@ public class WxPayAuthCodeToOpenId extends WxPayBaseRequest<WxPayAuthCodeToOpenI
     }
 
     protected String __doGetRequestURL() {
-        return "https://api.mch.weixin.qq.com/tools/authcodetoopenid";
+        return "tools/authcodetoopenid";
     }
 
     protected Response __doParseResponse(IHttpResponse httpResponse) throws Exception {

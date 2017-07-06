@@ -59,6 +59,10 @@ public abstract class WxPayBaseRequest<RESPONSE extends WxPayBaseResponse> exten
         return _params;
     }
 
+    protected WxPayAccountMeta __doGetAccountMeta() {
+        return __accountMeta;
+    }
+
     /**
      * @return 返回API请求地址
      */
@@ -78,10 +82,11 @@ public abstract class WxPayBaseRequest<RESPONSE extends WxPayBaseResponse> exten
     public RESPONSE execute() throws Exception {
         Map<String, Object> _params = buildSignatureParams();
         _params.put(IWxPay.Const.SIGN, __doCreateSignature(_params, __accountMeta.getMchKey()));
-        //
+        // 处理沙箱URL地址
+        String _requestURL = "https://api.mch.weixin.qq.com/" + __accountMeta.getSandboxPrefix() + __doGetRequestURL();
         IHttpResponse _response = HttpClientHelper.create()
                 .customSSL(__accountMeta.getConnectionSocketFactory())
-                .post(__doGetRequestURL(), __doBuildXML(_params));
+                .post(_requestURL, __doBuildXML(_params));
         if (_response != null) {
             if (_response.getStatusCode() == 200) {
                 return __doParseResponse(_response);

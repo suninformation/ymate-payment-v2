@@ -56,6 +56,16 @@ public class WxPayAccountMeta implements Serializable {
      */
     private String certFilePath;
 
+    /**
+     * 是否开启沙箱测试模式, 默认值: false
+     */
+    private boolean sandboxEnabled;
+
+    /**
+     * 获取沙箱测试模式下的接口URL地址前缀, 默认值: sandboxnew
+     */
+    private String sandboxPrefix;
+
     private SSLConnectionSocketFactory connectionSocketFactory;
 
     /**
@@ -149,5 +159,31 @@ public class WxPayAccountMeta implements Serializable {
 
     public void setNotifyUrl(String notifyUrl) {
         this.notifyUrl = notifyUrl;
+    }
+
+    public boolean isSandboxEnabled() {
+        return sandboxEnabled;
+    }
+
+    public void setSandboxEnabled(boolean sandboxEnabled) {
+        this.sandboxEnabled = sandboxEnabled;
+    }
+
+    public String getSandboxPrefix() {
+        if (sandboxEnabled) {
+            return sandboxPrefix;
+        }
+        return "";
+    }
+
+    public void setSandboxPrefix(String sandboxPrefix) {
+        sandboxPrefix = StringUtils.defaultIfBlank(sandboxPrefix, "sandboxnew");
+        if (StringUtils.startsWith(sandboxPrefix, "/")) {
+            sandboxPrefix = StringUtils.substringAfter(sandboxPrefix, "/");
+        }
+        if (!StringUtils.endsWith(this.sandboxPrefix, "/")) {
+            sandboxPrefix = sandboxPrefix + "/";
+        }
+        this.sandboxPrefix = sandboxPrefix;
     }
 }

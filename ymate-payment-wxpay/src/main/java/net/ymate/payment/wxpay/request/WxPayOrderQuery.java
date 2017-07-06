@@ -100,7 +100,7 @@ public class WxPayOrderQuery extends WxPayBaseRequest<WxPayOrderQuery.Response> 
     }
 
     protected String __doGetRequestURL() {
-        return "https://api.mch.weixin.qq.com/pay/orderquery";
+        return "pay/orderquery";
     }
 
     protected Response __doParseResponse(IHttpResponse httpResponse) throws Exception {

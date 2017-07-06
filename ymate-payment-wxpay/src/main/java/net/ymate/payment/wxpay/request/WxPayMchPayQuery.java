@@ -83,7 +83,7 @@ public class WxPayMchPayQuery extends WxPayBaseRequest<WxPayMchPayQuery.Response
     }
 
     protected String __doGetRequestURL() {
-        return "https://api.mch.weixin.qq.com/mmpaymkttransfers/gettransferinfo";
+        return "mmpaymkttransfers/gettransferinfo";
     }
 
     protected Response __doParseResponse(IHttpResponse httpResponse) throws Exception {

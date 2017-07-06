@@ -54,6 +54,6 @@ public class WxPayRedPackSendGroup extends WxPayRedPackSend {
     }
 
     protected String __doGetRequestURL() {
-        return "https://api.mch.weixin.qq.com/mmpaymkttransfers/sendgroupredpack";
+        return "mmpaymkttransfers/sendgroupredpack";
     }
 }

@@ -328,7 +328,7 @@ public class WxPayUnifiedOrder extends WxPayBaseRequest<WxPayUnifiedOrder.Respon
     }
 
     protected String __doGetRequestURL() {
-        return "https://api.mch.weixin.qq.com/pay/unifiedorder";
+        return "pay/unifiedorder";
     }
 
     protected Response __doParseResponse(IHttpResponse httpResponse) throws Exception {

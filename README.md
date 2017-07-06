@@ -437,6 +437,12 @@ ymp.configs.payment.wxpay.mch_id=
 # 商号密钥
 ymp.configs.payment.wxpay.mch_key=
 
+# 是否开启沙箱测试模式, 默认值: false
+ymp.configs.payment.wxpay.sandbox_enabled=
+
+# 获取沙箱测试模式下的接口URL地址前缀, 默认值: sandboxnew
+ymp.configs.payment.wxpay.sandbox_prefix=
+
 # 证书文件路径
 ymp.configs.payment.wxpay.cert_file_path=
 

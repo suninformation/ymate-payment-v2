@@ -154,7 +154,7 @@ public class WxPayRefundQuery extends WxPayBaseRequest<WxPayRefundQuery.Response
     }
 
     protected String __doGetRequestURL() {
-        return "https://api.mch.weixin.qq.com/pay/refundquery";
+        return "pay/refundquery";
     }
 
     protected Response __doParseResponse(IHttpResponse httpResponse) throws Exception {

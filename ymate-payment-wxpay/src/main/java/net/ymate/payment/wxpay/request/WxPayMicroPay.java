@@ -266,7 +266,7 @@ public class WxPayMicroPay extends WxPayBaseRequest<WxPayMicroPay.Response> {
     }
 
     protected String __doGetRequestURL() {
-        return "https://api.mch.weixin.qq.com/pay/micropay";
+        return "pay/micropay";
     }
 
     protected Response __doParseResponse(IHttpResponse httpResponse) throws Exception {

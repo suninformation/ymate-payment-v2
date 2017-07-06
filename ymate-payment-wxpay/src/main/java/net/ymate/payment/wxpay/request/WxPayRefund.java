@@ -200,7 +200,7 @@ public class WxPayRefund extends WxPayBaseRequest<WxPayRefund.Response> {
     }
 
     protected String __doGetRequestURL() {
-        return "https://api.mch.weixin.qq.com/secapi/pay/refund";
+        return "secapi/pay/refund";
     }
 
     protected Response __doParseResponse(IHttpResponse httpResponse) throws Exception {

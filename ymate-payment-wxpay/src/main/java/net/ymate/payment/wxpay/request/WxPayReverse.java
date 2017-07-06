@@ -100,7 +100,7 @@ public class WxPayReverse extends WxPayBaseRequest<WxPayReverse.Response> {
     }
 
     protected String __doGetRequestURL() {
-        return "https://api.mch.weixin.qq.com/secapi/pay/reverse";
+        return "secapi/pay/reverse";
     }
 
     protected Response __doParseResponse(IHttpResponse httpResponse) throws Exception {

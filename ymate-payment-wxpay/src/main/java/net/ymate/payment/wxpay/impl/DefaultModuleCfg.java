@@ -58,6 +58,8 @@ public class DefaultModuleCfg implements IWxPayModuleCfg {
                     _moduleCfgs.get(IWxPay.Const.MCH_KEY),
                     _moduleCfgs.get("cert_file_path"),
                     _moduleCfgs.get(IWxPay.Const.NOTIFY_URL));
+            _meta.setSandboxEnabled(BlurObject.bind(_moduleCfgs.get("sandbox_enabled")).toBooleanValue());
+            _meta.setSandboxPrefix(StringUtils.defaultIfBlank(_moduleCfgs.get("sandbox_prefix"), "sandboxnew"));
             //
             __defaultAccountId = _meta.getAppId();
             __accountProvider.registerAccount(_meta);

@@ -134,7 +134,7 @@ public class WxPayDownloadBill extends WxPayBaseRequest<WxPayDownloadBill.Respon
     }
 
     protected String __doGetRequestURL() {
-        return "https://api.mch.weixin.qq.com/pay/downloadbill";
+        return "pay/downloadbill";
     }
 
     protected Response __doParseResponse(IHttpResponse httpResponse) {

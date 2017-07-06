@@ -211,7 +211,7 @@ public class WxPayMchPay extends WxPayBaseRequest<WxPayMchPay.Response> {
     }
 
     protected String __doGetRequestURL() {
-        return "https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers";
+        return "mmpaymkttransfers/promotion/transfers";
     }
 
     protected Response __doParseResponse(IHttpResponse httpResponse) throws Exception {

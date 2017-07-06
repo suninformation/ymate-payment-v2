@@ -289,7 +289,7 @@ public class WxPayRedPackSend extends WxPayBaseRequest<WxPayRedPackSend.Response
     }
 
     protected String __doGetRequestURL() {
-        return "https://api.mch.weixin.qq.com/mmpaymkttransfers/sendredpack";
+        return "mmpaymkttransfers/sendredpack";
     }
 
     protected Response __doParseResponse(IHttpResponse httpResponse) throws Exception {

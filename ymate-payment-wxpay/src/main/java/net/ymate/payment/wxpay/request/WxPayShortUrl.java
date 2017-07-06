@@ -84,7 +84,7 @@ public class WxPayShortUrl extends WxPayBaseRequest<WxPayShortUrl.Response> {
     }
 
     protected String __doGetRequestURL() {
-        return "https://api.mch.weixin.qq.com/tools/shorturl";
+        return "tools/shorturl";
     }
 
     protected Response __doParseResponse(IHttpResponse httpResponse) throws Exception {
