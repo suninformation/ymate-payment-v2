@@ -243,7 +243,7 @@ public class WxPayMicroPay extends WxPayBaseRequest<WxPayMicroPay.Response> {
             throw new NullArgumentException("total_fee");
         }
         if (StringUtils.isBlank(this.spbillCreateIp)) {
-            throw new NullArgumentException("spbill_create_id");
+            throw new NullArgumentException("spbill_create_ip");
         }
         if (StringUtils.isBlank(this.authCode)) {
             throw new NullArgumentException("auth_code");
@@ -258,7 +258,7 @@ public class WxPayMicroPay extends WxPayBaseRequest<WxPayMicroPay.Response> {
         _params.put(IWxPay.Const.OUT_TRADE_NO, outTradeNo);
         _params.put("fee_type", feeType);
         _params.put("total_fee", totalFee);
-        _params.put("spbill_create_id", spbillCreateIp);
+        _params.put("spbill_create_ip", spbillCreateIp);
         _params.put("goods_tag", goodsTag);
         _params.put("limit_pay", limitPay);
         _params.put("auth_code", authCode);

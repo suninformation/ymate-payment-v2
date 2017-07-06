@@ -298,7 +298,7 @@ public class WxPayUnifiedOrder extends WxPayBaseRequest<WxPayUnifiedOrder.Respon
             throw new NullArgumentException("total_fee");
         }
         if (StringUtils.isBlank(this.spbillCreateIp)) {
-            throw new NullArgumentException("spbill_create_id");
+            throw new NullArgumentException("spbill_create_ip");
         }
         if (StringUtils.isBlank(this.notifyUrl)) {
             throw new NullArgumentException(IWxPay.Const.NOTIFY_URL);
@@ -316,7 +316,7 @@ public class WxPayUnifiedOrder extends WxPayBaseRequest<WxPayUnifiedOrder.Respon
         _params.put(IWxPay.Const.OUT_TRADE_NO, outTradeNo);
         _params.put("fee_type", feeType);
         _params.put("total_fee", totalFee);
-        _params.put("spbill_create_id", spbillCreateIp);
+        _params.put("spbill_create_ip", spbillCreateIp);
         _params.put("time_start", timeStart);
         _params.put("time_expire", timeExpire);
         _params.put("goods_tag", goodsTag);
