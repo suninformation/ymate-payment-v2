@@ -79,8 +79,6 @@ public class WxPayAccountMeta implements Serializable {
         this.mchId = mchId;
         this.mchKey = mchKey;
         this.notifyUrl = notifyUrl;
-        //
-        __doGetSandboxSignKeyIfNeed();
     }
 
     public WxPayAccountMeta(String appId, String mchId, String mchKey, String certFilePath, String notifyUrl) {
@@ -89,8 +87,6 @@ public class WxPayAccountMeta implements Serializable {
         this.mchKey = mchKey;
         this.certFilePath = certFilePath;
         this.notifyUrl = notifyUrl;
-        //
-        __doGetSandboxSignKeyIfNeed();
     }
 
     private void __doGetSandboxSignKeyIfNeed() {
@@ -186,6 +182,8 @@ public class WxPayAccountMeta implements Serializable {
 
     public void setSandboxEnabled(boolean sandboxEnabled) {
         this.sandboxEnabled = sandboxEnabled;
+        //
+        __doGetSandboxSignKeyIfNeed();
     }
 
     public String getSandboxPrefix() {
