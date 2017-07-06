@@ -72,7 +72,7 @@ public class WxPayNotifyController {
                             WxPayUnifiedOrder _request = _eventHandler.buildUnifiedOrderRequest(_meta, IWxPay.TradeType.NATIVE, notify.productId(), notify.attach());
                             WxPayUnifiedOrder.Response _response = _request.execute();
                             if (_response.checkReturnCode() && _response.checkResultCode()) {
-                                if (_meta.isSandboxEnabled() || _response.checkSignature(_meta.getMchKey())) {
+                                if (WxPay.get().getModuleCfg().isSignCheckDisabled() || _response.checkSignature(_meta.getMchKey())) {
                                     _returnValues.put(IWxPay.Const.RETURN_CODE, IWxPay.ReturnCode.SUCCESS.name());
                                     _returnValues.put(IWxPay.Const.RESULT_CODE, IWxPay.ResultCode.SUCCESS.name());
                                     _returnValues.put(IWxPay.Const.APP_ID, _meta.getAppId());

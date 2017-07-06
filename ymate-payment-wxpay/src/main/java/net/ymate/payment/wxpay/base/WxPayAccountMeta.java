@@ -15,6 +15,7 @@
  */
 package net.ymate.payment.wxpay.base;
 
+import net.ymate.payment.wxpay.request.WxPaySandboxSignKey;
 import net.ymate.platform.core.util.RuntimeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -78,6 +79,8 @@ public class WxPayAccountMeta implements Serializable {
         this.mchId = mchId;
         this.mchKey = mchKey;
         this.notifyUrl = notifyUrl;
+        //
+        __doGetSandboxSignKeyIfNeed();
     }
 
     public WxPayAccountMeta(String appId, String mchId, String mchKey, String certFilePath, String notifyUrl) {
@@ -86,6 +89,22 @@ public class WxPayAccountMeta implements Serializable {
         this.mchKey = mchKey;
         this.certFilePath = certFilePath;
         this.notifyUrl = notifyUrl;
+        //
+        __doGetSandboxSignKeyIfNeed();
+    }
+
+    private void __doGetSandboxSignKeyIfNeed() {
+        if (sandboxEnabled) {
+            try {
+                WxPaySandboxSignKey _request = new WxPaySandboxSignKey(this);
+                WxPaySandboxSignKey.Response _response = _request.execute();
+                if (_response.checkReturnCode()) {
+                    this.mchKey = _response.signkey();
+                }
+            } catch (Exception e) {
+                _LOG.error("try get sandbox signkey error: ", RuntimeUtils.unwrapThrow(e));
+            }
+        }
     }
 
     public String getAppId() {

@@ -93,7 +93,7 @@ public class WxPayNativeController {
                 WxPayUnifiedOrder _request = _eventHandler.buildUnifiedOrderRequest(_meta, IWxPay.TradeType.NATIVE, state, attach).openId(openId);
                 WxPayUnifiedOrder.Response _response = _request.execute();
                 //
-                if (_response.checkReturnCode() && _response.checkResultCode() && (_meta.isSandboxEnabled() || _response.checkSignature(_meta.getMchKey()))) {
+                if (_response.checkReturnCode() && _response.checkResultCode() && (WxPay.get().getModuleCfg().isSignCheckDisabled() || _response.checkSignature(_meta.getMchKey()))) {
                     String _qrCodeData = WebUtils.encryptStr(WebContext.getRequest(), _response.codeUrl());
                     return View.jspView(WxPay.get().getModuleCfg().getNativeView())
                             .addAttribute("_qrcode_data", _qrCodeData)

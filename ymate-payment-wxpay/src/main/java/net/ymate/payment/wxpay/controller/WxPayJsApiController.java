@@ -79,7 +79,7 @@ public class WxPayJsApiController {
                 WxPayUnifiedOrder _request = _eventHandler.buildUnifiedOrderRequest(_meta, IWxPay.TradeType.JSAPI, state, attach).openId(openId);
                 WxPayUnifiedOrder.Response _response = _request.execute();
                 //
-                if (_response.checkReturnCode() && _response.checkResultCode() && (_meta.isSandboxEnabled() || _response.checkSignature(_meta.getMchKey()))) {
+                if (_response.checkReturnCode() && _response.checkResultCode() && (WxPay.get().getModuleCfg().isSignCheckDisabled() || _response.checkSignature(_meta.getMchKey()))) {
                     // 封装JSAPI初始化相关参数
                     String _currentURL = WebUtils.buildURL(WebContext.getRequest(), "payment/wxpay/" + appId + "/js_api" + "?" + WebContext.getRequest().getQueryString(), true);
                     //
