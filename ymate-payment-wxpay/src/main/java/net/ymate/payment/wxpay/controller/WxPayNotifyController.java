@@ -74,10 +74,12 @@ public class WxPayNotifyController {
                             if (_response.checkReturnCode() && _response.checkResultCode()) {
                                 if (_response.checkSignature(_meta.getMchKey())) {
                                     _returnValues.put(IWxPay.Const.RETURN_CODE, IWxPay.ReturnCode.SUCCESS.name());
+                                    _returnValues.put(IWxPay.Const.RESULT_CODE, IWxPay.ResultCode.SUCCESS.name());
                                     _returnValues.put(IWxPay.Const.APP_ID, _meta.getAppId());
                                     _returnValues.put(IWxPay.Const.MCH_ID, _meta.getMchId());
                                     _returnValues.put(IWxPay.Const.NONCE_STR, WxPayBaseData.__doCreateNonceStr());
                                     _returnValues.put("prepay_id", _response.prepayId());
+                                    _returnValues.put("trade_type", IWxPay.TradeType.NATIVE.name());
                                     _returnValues.put(IWxPay.Const.SIGN, WxPayBaseData.__doCreateSignature(_returnValues, _meta.getMchKey()));
                                 } else {
                                     _returnValues.put(IWxPay.Const.RETURN_CODE, IWxPay.ReturnCode.FAIL.name());
