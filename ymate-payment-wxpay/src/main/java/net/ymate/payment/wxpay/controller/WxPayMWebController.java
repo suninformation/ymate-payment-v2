@@ -15,6 +15,7 @@
  */
 package net.ymate.payment.wxpay.controller;
 
+import net.ymate.framework.core.util.WebUtils;
 import net.ymate.payment.wxpay.IWxPay;
 import net.ymate.payment.wxpay.IWxPayEventHandler;
 import net.ymate.payment.wxpay.WxPay;
@@ -29,6 +30,7 @@ import net.ymate.platform.webmvc.base.Type;
 import net.ymate.platform.webmvc.view.IView;
 import net.ymate.platform.webmvc.view.View;
 import net.ymate.platform.webmvc.view.impl.HttpStatusView;
+import org.apache.commons.lang.StringUtils;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -45,7 +47,8 @@ public class WxPayMWebController {
     @RequestMapping(value = "{app_id}/mweb", method = {Type.HttpMethod.GET, Type.HttpMethod.POST})
     public IView __doMWeb(@PathVariable("app_id") String appId,
                           @VRequried @RequestParam String state,
-                          @RequestParam String attach) throws Exception {
+                          @RequestParam String attach,
+                          @RequestParam("redirect_url") String redirectUrl) throws Exception {
         IWxPayEventHandler _eventHandler = WxPay.get().getModuleCfg().getEventHandler();
         if (_eventHandler != null) {
             WxPayAccountMeta _meta = WxPay.get().getModuleCfg().getAccountProvider().getAccount(appId);
@@ -54,6 +57,9 @@ public class WxPayMWebController {
                 WxPayUnifiedOrder.Response _response = _request.execute();
                 //
                 if (_response.checkReturnCode() && _response.checkResultCode() && (WxPay.get().getModuleCfg().isSignCheckDisabled() || _response.checkSignature(_meta.getMchKey()))) {
+                    if (StringUtils.isNotBlank(redirectUrl)) {
+                        return View.redirectView(_response.mwebUrl() + "&redirect_url=" + WebUtils.encodeURL(redirectUrl));
+                    }
                     return View.redirectView(_response.mwebUrl());
                 }
             }

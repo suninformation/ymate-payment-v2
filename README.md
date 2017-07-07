@@ -347,7 +347,7 @@ ymp.configs.payment.alipay.return_url=
     微信H5支付模式：
     
     ```
-    http://<域名>/payment/wxpay/<APP_ID>/mweb?state=<订单编号>&attach=<附加信息>
+    http://<域名>/payment/wxpay/<APP_ID>/mweb?state=<订单编号>&attach=<附加信息>&redirect_url=<重定向URL地址>
     ```
     
     微信Native(原生)支付模式一：
