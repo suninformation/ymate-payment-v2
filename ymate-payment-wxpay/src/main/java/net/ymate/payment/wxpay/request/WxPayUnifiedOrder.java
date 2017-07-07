@@ -381,6 +381,11 @@ public class WxPayUnifiedOrder extends WxPayBaseRequest<WxPayUnifiedOrder.Respon
          */
         private String codeUrl;
 
+        /**
+         * 支付跳转链接
+         */
+        private String mwebUrl;
+
         public Response(String protocol) throws Exception {
             super(protocol);
             this.appId = BlurObject.bind(this.getResponseParams().get(IWxPay.Const.APP_ID)).toStringValue();
@@ -388,6 +393,7 @@ public class WxPayUnifiedOrder extends WxPayBaseRequest<WxPayUnifiedOrder.Respon
             this.tradeType = BlurObject.bind(this.getResponseParams().get("trade_type")).toStringValue();
             this.prepayId = BlurObject.bind(this.getResponseParams().get("prepay_id")).toStringValue();
             this.codeUrl = BlurObject.bind(this.getResponseParams().get("code_url")).toStringValue();
+            this.mwebUrl = BlurObject.bind(this.getResponseParams().get("mweb_url")).toStringValue();
         }
 
         public String appId() {
@@ -408,6 +414,10 @@ public class WxPayUnifiedOrder extends WxPayBaseRequest<WxPayUnifiedOrder.Respon
 
         public String codeUrl() {
             return codeUrl;
+        }
+
+        public String mwebUrl() {
+            return mwebUrl;
         }
     }
 }

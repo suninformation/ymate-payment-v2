@@ -543,7 +543,7 @@ public interface IWxPay {
      * 交易类型
      */
     enum TradeType {
-        JSAPI, NATIVE, APP, MICROPAY;
+        JSAPI, NATIVE, APP, MICROPAY, MWEB;
     }
 
     /**
