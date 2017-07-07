@@ -83,14 +83,13 @@ public class WxPayNativeController {
 
     @RequestMapping(value = "{app_id}/native/dynamic", method = {Type.HttpMethod.GET, Type.HttpMethod.POST})
     public IView __doNativeDynamic(@PathVariable("app_id") String appId,
-                                   @VRequried @RequestParam("open_id") String openId,
                                    @VRequried @RequestParam String state,
                                    @RequestParam String attach) throws Exception {
         IWxPayEventHandler _eventHandler = WxPay.get().getModuleCfg().getEventHandler();
         if (_eventHandler != null) {
             WxPayAccountMeta _meta = WxPay.get().getModuleCfg().getAccountProvider().getAccount(appId);
             if (_meta != null) {
-                WxPayUnifiedOrder _request = _eventHandler.buildUnifiedOrderRequest(_meta, IWxPay.TradeType.NATIVE, state, attach).openId(openId);
+                WxPayUnifiedOrder _request = _eventHandler.buildUnifiedOrderRequest(_meta, IWxPay.TradeType.NATIVE, state, attach);
                 WxPayUnifiedOrder.Response _response = _request.execute();
                 //
                 if (_response.checkReturnCode() && _response.checkResultCode() && (WxPay.get().getModuleCfg().isSignCheckDisabled() || _response.checkSignature(_meta.getMchKey()))) {
