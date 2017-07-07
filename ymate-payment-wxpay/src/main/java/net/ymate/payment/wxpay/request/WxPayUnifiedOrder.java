@@ -119,6 +119,11 @@ public class WxPayUnifiedOrder extends WxPayBaseRequest<WxPayUnifiedOrder.Respon
      */
     private String openId;
 
+    /**
+     * 场景信息
+     */
+    private String sceneInfo;
+
     public WxPayUnifiedOrder(WxPayAccountMeta accountMeta, String body, String outTradeNo, Integer totalFee, String spbillCreateIp, String notifyUrl, String tradeType) {
         super(accountMeta);
         this.appId = accountMeta.getAppId();
@@ -283,6 +288,15 @@ public class WxPayUnifiedOrder extends WxPayBaseRequest<WxPayUnifiedOrder.Respon
         return this;
     }
 
+    public String sceneInfo() {
+        return sceneInfo;
+    }
+
+    public WxPayUnifiedOrder sceneInfo(String sceneInfo) {
+        this.sceneInfo = sceneInfo;
+        return this;
+    }
+
     @Override
     public Map<String, Object> buildSignatureParams() {
         if (StringUtils.isBlank(this.appId)) {
@@ -325,6 +339,7 @@ public class WxPayUnifiedOrder extends WxPayBaseRequest<WxPayUnifiedOrder.Respon
         _params.put("product_id", productId);
         _params.put("limit_pay", limitPay);
         _params.put("openid", openId);
+        _params.put("scene_info", sceneInfo);
         return _params;
     }
 

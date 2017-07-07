@@ -97,9 +97,9 @@ public class WxPayMicroPay extends WxPayBaseRequest<WxPayMicroPay.Response> {
     private String authCode;
 
     /**
-     * 接口版本号
+     * 场景信息
      */
-    private String version;
+    private String sceneInfo;
 
     public WxPayMicroPay(WxPayAccountMeta accountMeta, String body, String outTradeNo, Integer totalFee, String spbillCreateIp, String authCode) {
         super(accountMeta);
@@ -219,12 +219,12 @@ public class WxPayMicroPay extends WxPayBaseRequest<WxPayMicroPay.Response> {
         return this;
     }
 
-    public String version() {
-        return version;
+    public String sceneInfo() {
+        return sceneInfo;
     }
 
-    public WxPayMicroPay version(String version) {
-        this.version = version;
+    public WxPayMicroPay sceneInfo(String sceneInfo) {
+        this.sceneInfo = sceneInfo;
         return this;
     }
 
@@ -262,7 +262,7 @@ public class WxPayMicroPay extends WxPayBaseRequest<WxPayMicroPay.Response> {
         _params.put("goods_tag", goodsTag);
         _params.put("limit_pay", limitPay);
         _params.put("auth_code", authCode);
-        _params.put("version", version);
+        _params.put("scene_info", sceneInfo);
         return _params;
     }
 
@@ -283,11 +283,6 @@ public class WxPayMicroPay extends WxPayBaseRequest<WxPayMicroPay.Response> {
          * 营销详情
          */
         private String promotionDetail;
-
-        /**
-         * 接口版本号
-         */
-        private String version;
 
         public Response(String protocol) throws Exception {
             super(protocol);
