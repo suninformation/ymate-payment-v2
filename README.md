@@ -344,6 +344,12 @@ ymp.configs.payment.alipay.return_url=
     http://<域名>/payment/wxpay/<APP_ID>/jsapi?open_id=<OPEN_ID>state=<订单编号>&attach=<附加信息>&debug=<true|false>
     ```
     
+    微信H5支付模式：
+    
+    ```
+    http://<域名>/payment/wxpay/<APP_ID>/mweb?state=<订单编号>&attach=<附加信息>
+    ```
+    
     微信Native(原生)支付模式一：
     
     > 商户按固定格式生成链接二维码，用户扫码后调微信会将productid和用户openid发送到商户设置的链接上，商户收到请求生成订单，调用统一支付接口下单提交到微信，微信会返回给商户prepayid。
@@ -357,7 +363,7 @@ ymp.configs.payment.alipay.return_url=
     > 商户生成订单，先调用统一支付接口获取到code_url，此URL直接生成二维码，用户扫码后调起支付。
     
     ```
-    http://<域名>/payment/wxpay/<APP_ID>/native/dynamic?open_id=<OPEN_ID>&state=<订单编号>&attach=<附加信息>
+    http://<域名>/payment/wxpay/<APP_ID>/native/dynamic?state=<订单编号>&attach=<附加信息>
     ```
     
     URL参数说明：
