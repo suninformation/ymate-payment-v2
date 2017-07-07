@@ -71,6 +71,7 @@ public class WxPayRefundQuery extends WxPayBaseRequest<WxPayRefundQuery.Response
 
     public WxPayRefundQuery(WxPayAccountMeta accountMeta, String transactionId, String outTradeNo, String outRefundNo, String refundId) {
         super(accountMeta);
+        this.appId = accountMeta.getAppId();
         this.transactionId = transactionId;
         this.outTradeNo = outTradeNo;
         this.outRefundNo = outRefundNo;
