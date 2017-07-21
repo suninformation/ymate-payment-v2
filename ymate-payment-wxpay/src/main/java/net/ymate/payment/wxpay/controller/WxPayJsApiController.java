@@ -81,7 +81,8 @@ public class WxPayJsApiController {
                 //
                 if (_response.checkReturnCode() && _response.checkResultCode() && (WxPay.get().getModuleCfg().isSignCheckDisabled() || _response.checkSignature(_meta.getMchKey()))) {
                     // 封装JSAPI初始化相关参数
-                    String _currentURL = WebUtils.buildURL(WebContext.getRequest(), "payment/wxpay/" + appId + "/js_api" + "?" + WebContext.getRequest().getQueryString(), true);
+                    String _queryStr = StringUtils.trimToNull(WebContext.getRequest().getQueryString());
+                    String _currentURL = WebUtils.buildURL(WebContext.getRequest(), "payment/wxpay/" + appId + "/js_api" + (_queryStr == null ? "" : "?" + _queryStr), true);
                     //
                     String _timestamp = DateTimeUtils.currentTimeUTC() + "";
                     String _nonceStr = WxPayBaseData.__doCreateNonceStr();
