@@ -341,7 +341,7 @@ ymp.configs.payment.alipay.return_url=
     微信JS_API模式：
 
     ```
-    http://<域名>/payment/wxpay/<APP_ID>/jsapi?open_id=<OPEN_ID>state=<订单编号>&attach=<附加信息>&debug=<true|false>
+    http://<域名>/payment/wxpay/jsapi/<APP_ID>?open_id=<OPEN_ID>state=<订单编号>&attach=<附加信息>&debug=<true|false>
     ```
     
     微信H5支付模式：

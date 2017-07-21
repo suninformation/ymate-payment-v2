@@ -66,7 +66,7 @@ public class WxPayJsApiController {
      * @return 微信支付 -- JS_API模式
      * @throws Exception 可能产生的任何异常
      */
-    @RequestMapping(value = "{app_id}/jsapi", method = {Type.HttpMethod.GET, Type.HttpMethod.POST})
+    @RequestMapping(value = "/jsapi/{app_id}", method = {Type.HttpMethod.GET, Type.HttpMethod.POST})
     public IView __doJsApi(@PathVariable("app_id") String appId,
                            @VRequried @RequestParam("open_id") String openId,
                            @VRequried @RequestParam String state,
@@ -82,14 +82,15 @@ public class WxPayJsApiController {
                 if (_response.checkReturnCode() && _response.checkResultCode() && (WxPay.get().getModuleCfg().isSignCheckDisabled() || _response.checkSignature(_meta.getMchKey()))) {
                     // 封装JSAPI初始化相关参数
                     String _queryStr = StringUtils.trimToNull(WebContext.getRequest().getQueryString());
-                    String _currentURL = WebUtils.buildURL(WebContext.getRequest(), "payment/wxpay/" + appId + "/js_api" + (_queryStr == null ? "" : "?" + _queryStr), true);
+                    String _currentURL = WebUtils.buildURL(WebContext.getRequest(), "payment/wxpay/jsapi/" + appId + (_queryStr == null ? "" : "?" + _queryStr), true);
                     //
                     String _timestamp = DateTimeUtils.currentTimeUTC() + "";
                     String _nonceStr = WxPayBaseData.__doCreateNonceStr();
-                    String _config = __buildJsApiConfigStr(appId, _eventHandler.getJsApiTicket(appId), StringUtils.substringBefore(_currentURL, "#"), _timestamp, _nonceStr, debug);
+                    String _config = __buildJsApiConfigStr(_meta.getAppId(), _eventHandler.getJsApiTicket(_meta.getAppId()), StringUtils.substringBefore(_currentURL, "#"), _timestamp, _nonceStr, debug);
                     // 封装基于JSAPI的支付调用相关参数
                     Map<String, Object> _paramMap = new HashMap<String, Object>();
-                    _paramMap.put("timestamp", _timestamp);
+                    _paramMap.put("appId", _meta.getAppId());
+                    _paramMap.put("timeStamp", _timestamp);
                     _paramMap.put("nonceStr", _nonceStr);
                     _paramMap.put("package", "prepay_id=" + _response.prepayId());
                     _paramMap.put("signType", IWxPay.Const.SIGN_TYPE_MD5);
@@ -98,7 +99,7 @@ public class WxPayJsApiController {
                     return View.jspView(WxPay.get().getModuleCfg().getJsApiView())
                             .addAttribute("_config", _config)
                             .addAttribute("_data", _paramMap)
-                            .addAttribute("_trade_no", state).addAttribute("_app_id", appId);
+                            .addAttribute("_trade_no", state);
                 }
             }
         }
@@ -106,7 +107,7 @@ public class WxPayJsApiController {
     }
 
     private String __buildJsApiConfigStr(String appId, String jsapiTicket, String url, String timestamp, String noncestr, boolean debug) throws Exception {
-        String _signature = "jsapi_ticket=" + jsapiTicket + "&" + "noncestr=" + noncestr + "&" + "timestamp=" + timestamp + "&" + "url=" + url;
+        String _signature = "jsapi_ticket=" + jsapiTicket + "&" + "noncestr=" + noncestr + "&" + "timeStamp=" + timestamp + "&" + "url=" + url;
         _signature = DigestUtils.sha1Hex(_signature);
         //
         JSONObject _json = new JSONObject();
