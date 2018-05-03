@@ -23,7 +23,7 @@ import net.ymate.payment.alipay.base.AliPayBaseReturn;
 import net.ymate.payment.alipay.intercept.AliPaySignatureCheckInterceptor;
 import net.ymate.platform.core.beans.annotation.Before;
 import net.ymate.platform.core.beans.annotation.Clean;
-import net.ymate.platform.validation.validate.VRequried;
+import net.ymate.platform.validation.validate.VRequired;
 import net.ymate.platform.webmvc.annotation.*;
 import net.ymate.platform.webmvc.base.Type;
 import net.ymate.platform.webmvc.view.IView;
@@ -50,7 +50,7 @@ public class AliPayController {
      */
     @RequestMapping(value = "/{app_id}/page", method = {Type.HttpMethod.POST, Type.HttpMethod.GET})
     @Clean
-    public IView __pagePay(@PathVariable("app_id") String appId, @VRequried @RequestParam String state, @RequestParam String attach) throws Exception {
+    public IView __pagePay(@PathVariable("app_id") String appId, @VRequired @RequestParam String state, @RequestParam String attach) throws Exception {
         IAliPayRequest _request = AliPay.get().tradePagePay(appId, state, attach);
         return new HtmlView(_request.build().executeActionForm())
                 .setContentType(Type.ContentType.HTML.getContentType()
@@ -60,7 +60,7 @@ public class AliPayController {
 
     @RequestMapping(value = "/{app_id}/wap", method = {Type.HttpMethod.POST, Type.HttpMethod.GET})
     @Clean
-    public IView __wapPay(@PathVariable("app_id") String appId, @VRequried @RequestParam String state, @RequestParam String attach) throws Exception {
+    public IView __wapPay(@PathVariable("app_id") String appId, @VRequired @RequestParam String state, @RequestParam String attach) throws Exception {
         IAliPayRequest _request = AliPay.get().tradeWapPay(appId, state, attach);
         return new HtmlView(_request.build().executeActionForm())
                 .setContentType(Type.ContentType.HTML.getContentType()

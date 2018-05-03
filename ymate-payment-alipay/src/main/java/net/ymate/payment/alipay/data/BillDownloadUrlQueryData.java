@@ -53,6 +53,7 @@ public class BillDownloadUrlQueryData implements IAliPayRequestData {
         this.billDate = billDate;
     }
 
+    @Override
     public Map<String, String> buildRequestParams() {
         Map<String, String> _params = new HashMap<String, String>();
         //

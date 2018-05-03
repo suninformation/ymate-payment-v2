@@ -80,6 +80,7 @@ public class TradeRefundData implements IAliPayRequestData {
         this.refundAmount = refundAmount;
     }
 
+    @Override
     public Map<String, String> buildRequestParams() {
         Map<String, String> _params = new HashMap<String, String>();
         //

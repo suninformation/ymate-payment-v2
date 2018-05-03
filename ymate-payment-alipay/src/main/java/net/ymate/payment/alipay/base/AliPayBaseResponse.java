@@ -36,6 +36,7 @@ public abstract class AliPayBaseResponse implements IAliPayResponse {
 
     private String sign;
 
+    @Override
     public String getCode() {
         return code;
     }
@@ -44,6 +45,7 @@ public abstract class AliPayBaseResponse implements IAliPayResponse {
         this.code = code;
     }
 
+    @Override
     public String getMsg() {
         return msg;
     }
@@ -52,6 +54,7 @@ public abstract class AliPayBaseResponse implements IAliPayResponse {
         this.msg = msg;
     }
 
+    @Override
     public String getSubCode() {
         return subCode;
     }
@@ -60,6 +63,7 @@ public abstract class AliPayBaseResponse implements IAliPayResponse {
         this.subCode = subCode;
     }
 
+    @Override
     public String getSubMsg() {
         return subMsg;
     }
@@ -68,10 +72,12 @@ public abstract class AliPayBaseResponse implements IAliPayResponse {
         this.subMsg = subMsg;
     }
 
+    @Override
     public String getSign() {
         return sign;
     }
 
+    @Override
     public void setSign(String sign) {
         this.sign = sign;
     }

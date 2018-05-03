@@ -25,6 +25,7 @@ public interface IAliPayResponseParser<RESPONSE extends IAliPayResponse> {
      * 什么也不做的响应数据分析器
      */
     class NOTHING implements IAliPayResponseParser<IAliPayResponse.NOTHING> {
+        @Override
         public IAliPayResponse.NOTHING parserResponse(String responseContent) throws Exception {
             throw new UnsupportedOperationException();
         }

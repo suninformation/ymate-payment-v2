@@ -55,6 +55,7 @@ public class TradeRefundQueryData implements IAliPayRequestData {
         this.outRequestNo = outRequestNo;
     }
 
+    @Override
     public Map<String, String> buildRequestParams() {
         Map<String, String> _params = new HashMap<String, String>();
         //

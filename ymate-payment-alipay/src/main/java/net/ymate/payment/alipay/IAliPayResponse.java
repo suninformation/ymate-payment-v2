@@ -25,30 +25,37 @@ public interface IAliPayResponse {
      * 什么也不做的响应数据接口实现
      */
     class NOTHING implements IAliPayResponse {
+        @Override
         public String getCode() {
             throw new UnsupportedOperationException();
         }
 
+        @Override
         public String getMsg() {
             throw new UnsupportedOperationException();
         }
 
+        @Override
         public String getSubCode() {
             throw new UnsupportedOperationException();
         }
 
+        @Override
         public String getSubMsg() {
             throw new UnsupportedOperationException();
         }
 
+        @Override
         public String getSign() {
             throw new UnsupportedOperationException();
         }
 
+        @Override
         public void setSign(String sign) {
             throw new UnsupportedOperationException();
         }
 
+        @Override
         public boolean successful() {
             throw new UnsupportedOperationException();
         }

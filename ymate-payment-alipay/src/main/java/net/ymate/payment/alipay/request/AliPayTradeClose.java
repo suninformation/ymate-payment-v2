@@ -55,6 +55,7 @@ public class AliPayTradeClose extends AliPayBaseRequest<TradeCloseData, AliPayTr
         @JSONField(name = "out_trade_no")
         private String outTradeNo;
 
+        @Override
         public boolean successful() {
             return true;
         }

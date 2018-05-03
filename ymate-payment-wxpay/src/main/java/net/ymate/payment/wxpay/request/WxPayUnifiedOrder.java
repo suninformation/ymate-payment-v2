@@ -343,10 +343,12 @@ public class WxPayUnifiedOrder extends WxPayBaseRequest<WxPayUnifiedOrder.Respon
         return _params;
     }
 
+    @Override
     protected String __doGetRequestURL() {
         return "pay/unifiedorder";
     }
 
+    @Override
     protected Response __doParseResponse(IHttpResponse httpResponse) throws Exception {
         return new Response(httpResponse.getContent());
     }

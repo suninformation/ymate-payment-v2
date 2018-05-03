@@ -32,6 +32,7 @@ import java.util.Map;
  */
 public class WxPayRequestProcessor implements IRequestProcessor {
 
+    @Override
     public Map<String, Object> processRequestParams(IWebMvc owner, RequestMeta requestMeta) throws Exception {
         Map<String, Object> _params = new HashMap<String, Object>();
         //

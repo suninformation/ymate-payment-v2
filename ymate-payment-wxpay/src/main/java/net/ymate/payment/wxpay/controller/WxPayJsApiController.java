@@ -24,7 +24,7 @@ import net.ymate.payment.wxpay.base.WxPayAccountMeta;
 import net.ymate.payment.wxpay.base.WxPayBaseData;
 import net.ymate.payment.wxpay.request.WxPayUnifiedOrder;
 import net.ymate.platform.core.util.DateTimeUtils;
-import net.ymate.platform.validation.validate.VRequried;
+import net.ymate.platform.validation.validate.VRequired;
 import net.ymate.platform.webmvc.annotation.Controller;
 import net.ymate.platform.webmvc.annotation.PathVariable;
 import net.ymate.platform.webmvc.annotation.RequestMapping;
@@ -68,8 +68,8 @@ public class WxPayJsApiController {
      */
     @RequestMapping(value = "/jsapi/{app_id}", method = {Type.HttpMethod.GET, Type.HttpMethod.POST})
     public IView __doJsApi(@PathVariable("app_id") String appId,
-                           @VRequried @RequestParam("open_id") String openId,
-                           @VRequried @RequestParam String state,
+                           @VRequired @RequestParam("open_id") String openId,
+                           @VRequired @RequestParam String state,
                            @RequestParam String attach,
                            @RequestParam boolean debug) throws Exception {
         IWxPayEventHandler _eventHandler = WxPay.get().getModuleCfg().getEventHandler();

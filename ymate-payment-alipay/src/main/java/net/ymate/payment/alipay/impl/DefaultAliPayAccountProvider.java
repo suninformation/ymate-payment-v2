@@ -34,29 +34,36 @@ public class DefaultAliPayAccountProvider implements IAliPayAccountProvider {
 
     private IAliPay __owner;
 
+    @Override
     public void init(IAliPay owner) throws Exception {
         __owner = owner;
     }
 
+    @Override
     public void destroy() throws Exception {
     }
 
+    @Override
     public void registerAccount(AliPayAccountMeta accountMeta) {
         __CACHES.put(accountMeta.getAppId(), accountMeta);
     }
 
+    @Override
     public AliPayAccountMeta unregisterAccount(String accountId) {
         return __CACHES.remove(accountId);
     }
 
+    @Override
     public Collection<String> getAccountIds() {
         return __CACHES.keySet();
     }
 
+    @Override
     public boolean hasAccount(String accountId) {
         return __CACHES.containsKey(accountId);
     }
 
+    @Override
     public AliPayAccountMeta getAccount(String accountId) {
         if (StringUtils.equalsIgnoreCase(accountId, "default")) {
             return __CACHES.get(__owner.getModuleCfg().getDefaultAccountId());

@@ -76,22 +76,27 @@ public class DefaultModuleCfg implements IAliPayModuleCfg {
         __signCheckDisabled = BlurObject.bind(_moduleCfgs.get("sign_check_disabled")).toBooleanValue();
     }
 
+    @Override
     public String getGatewayUrl() {
         return __gatewayUrl;
     }
 
+    @Override
     public IAliPayAccountProvider getAccountProvider() {
         return __accountProvider;
     }
 
+    @Override
     public IAliPayEventHandler getEventHandler() {
         return __eventHandler;
     }
 
+    @Override
     public String getDefaultAccountId() {
         return __defaultAccountId;
     }
 
+    @Override
     public boolean isSignCheckDisabled() {
         return __signCheckDisabled;
     }

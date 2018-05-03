@@ -133,10 +133,12 @@ public class WxPayDownloadBill extends WxPayBaseRequest<WxPayDownloadBill.Respon
         return _params;
     }
 
+    @Override
     protected String __doGetRequestURL() {
         return "pay/downloadbill";
     }
 
+    @Override
     protected Response __doParseResponse(IHttpResponse httpResponse) {
         try {
             XPathHelper _xpath = new XPathHelper(httpResponse.getContent());

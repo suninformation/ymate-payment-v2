@@ -210,10 +210,12 @@ public class WxPayMchPay extends WxPayBaseRequest<WxPayMchPay.Response> {
         return _params;
     }
 
+    @Override
     protected String __doGetRequestURL() {
         return "mmpaymkttransfers/promotion/transfers";
     }
 
+    @Override
     protected Response __doParseResponse(IHttpResponse httpResponse) throws Exception {
         return new Response(httpResponse.getContent());
     }

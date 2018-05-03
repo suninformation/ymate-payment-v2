@@ -145,6 +145,7 @@ public class TradeWapPayData implements IAliPayRequestData {
         this.subject = subject;
     }
 
+    @Override
     public Map<String, String> buildRequestParams() {
         Map<String, String> _params = new HashMap<String, String>();
         //

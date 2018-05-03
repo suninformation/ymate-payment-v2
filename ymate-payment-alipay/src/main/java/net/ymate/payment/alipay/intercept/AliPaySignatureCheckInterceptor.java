@@ -42,6 +42,7 @@ public class AliPaySignatureCheckInterceptor implements IInterceptor {
 
     private static final Log _LOG = LogFactory.getLog(AliPaySignatureCheckInterceptor.class);
 
+    @Override
     public Object intercept(InterceptContext context) throws Exception {
         if (!AliPay.get().getModuleCfg().isSignCheckDisabled()) {
             switch (context.getDirection()) {

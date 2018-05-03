@@ -33,10 +33,12 @@ public class WxPaySandboxSignKey extends WxPayBaseRequest<WxPaySandboxSignKey.Re
         super(accountMeta);
     }
 
+    @Override
     protected String __doGetRequestURL() {
         return "https://api.mch.weixin.qq.com/sandboxnew/pay/getsignkey";
     }
 
+    @Override
     protected Response __doParseResponse(IHttpResponse httpResponse) throws Exception {
         return new Response(httpResponse.getContent());
     }

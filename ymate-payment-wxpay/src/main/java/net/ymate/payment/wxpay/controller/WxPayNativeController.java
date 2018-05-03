@@ -24,7 +24,7 @@ import net.ymate.payment.wxpay.base.WxPayAccountMeta;
 import net.ymate.payment.wxpay.base.WxPayBaseData;
 import net.ymate.payment.wxpay.request.WxPayUnifiedOrder;
 import net.ymate.platform.core.util.DateTimeUtils;
-import net.ymate.platform.validation.validate.VRequried;
+import net.ymate.platform.validation.validate.VRequired;
 import net.ymate.platform.webmvc.annotation.Controller;
 import net.ymate.platform.webmvc.annotation.PathVariable;
 import net.ymate.platform.webmvc.annotation.RequestMapping;
@@ -57,7 +57,7 @@ public class WxPayNativeController {
 
     @RequestMapping(value = "{app_id}/native/static", method = {Type.HttpMethod.GET, Type.HttpMethod.POST})
     public IView __doNativeStatic(@PathVariable("app_id") String appId,
-                                  @VRequried @RequestParam String state,
+                                  @VRequired @RequestParam String state,
                                   @RequestParam String attach) throws Exception {
         IWxPayEventHandler _eventHandler = WxPay.get().getModuleCfg().getEventHandler();
         if (_eventHandler != null) {
@@ -83,7 +83,7 @@ public class WxPayNativeController {
 
     @RequestMapping(value = "{app_id}/native/dynamic", method = {Type.HttpMethod.GET, Type.HttpMethod.POST})
     public IView __doNativeDynamic(@PathVariable("app_id") String appId,
-                                   @VRequried @RequestParam String state,
+                                   @VRequired @RequestParam String state,
                                    @RequestParam String attach) throws Exception {
         IWxPayEventHandler _eventHandler = WxPay.get().getModuleCfg().getEventHandler();
         if (_eventHandler != null) {

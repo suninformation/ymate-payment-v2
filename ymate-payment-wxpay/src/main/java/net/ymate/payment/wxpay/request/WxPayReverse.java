@@ -99,10 +99,12 @@ public class WxPayReverse extends WxPayBaseRequest<WxPayReverse.Response> {
         return _params;
     }
 
+    @Override
     protected String __doGetRequestURL() {
         return "secapi/pay/reverse";
     }
 
+    @Override
     protected Response __doParseResponse(IHttpResponse httpResponse) throws Exception {
         return new Response(httpResponse.getContent());
     }

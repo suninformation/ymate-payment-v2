@@ -82,10 +82,12 @@ public class WxPayCloseOrder extends WxPayBaseRequest<WxPayCloseOrder.Response> 
         return _params;
     }
 
+    @Override
     protected String __doGetRequestURL() {
         return "pay/closeorder";
     }
 
+    @Override
     protected Response __doParseResponse(IHttpResponse httpResponse) throws Exception {
         return new Response(httpResponse.getContent());
     }

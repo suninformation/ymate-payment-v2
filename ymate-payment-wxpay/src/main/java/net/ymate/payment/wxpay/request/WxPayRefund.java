@@ -200,10 +200,12 @@ public class WxPayRefund extends WxPayBaseRequest<WxPayRefund.Response> {
         return _params;
     }
 
+    @Override
     protected String __doGetRequestURL() {
         return "secapi/pay/refund";
     }
 
+    @Override
     protected Response __doParseResponse(IHttpResponse httpResponse) throws Exception {
         return new Response(httpResponse.getContent());
     }

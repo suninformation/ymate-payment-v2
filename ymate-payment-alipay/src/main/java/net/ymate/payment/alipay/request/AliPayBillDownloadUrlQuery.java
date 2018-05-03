@@ -49,6 +49,7 @@ public class AliPayBillDownloadUrlQuery extends AliPayBaseRequest<BillDownloadUr
         @JSONField(name = "bill_download_url")
         private String billDownloadUrl;
 
+        @Override
         public boolean successful() {
             return true;
         }

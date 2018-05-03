@@ -83,10 +83,12 @@ public class WxPayShortUrl extends WxPayBaseRequest<WxPayShortUrl.Response> {
         return _params;
     }
 
+    @Override
     protected String __doGetRequestURL() {
         return "tools/shorturl";
     }
 
+    @Override
     protected Response __doParseResponse(IHttpResponse httpResponse) throws Exception {
         return new Response(httpResponse.getContent());
     }

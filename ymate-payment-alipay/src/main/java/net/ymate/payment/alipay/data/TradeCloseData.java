@@ -52,6 +52,7 @@ public class TradeCloseData implements IAliPayRequestData {
         this.tradeNo = tradeNo;
     }
 
+    @Override
     public Map<String, String> buildRequestParams() {
         Map<String, String> _params = new HashMap<String, String>();
         //

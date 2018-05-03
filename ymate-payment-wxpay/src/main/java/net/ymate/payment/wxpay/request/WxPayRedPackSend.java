@@ -288,10 +288,12 @@ public class WxPayRedPackSend extends WxPayBaseRequest<WxPayRedPackSend.Response
         return _params;
     }
 
+    @Override
     protected String __doGetRequestURL() {
         return "mmpaymkttransfers/sendredpack";
     }
 
+    @Override
     protected Response __doParseResponse(IHttpResponse httpResponse) throws Exception {
         return new Response(httpResponse.getContent());
     }

@@ -266,10 +266,12 @@ public class WxPayMicroPay extends WxPayBaseRequest<WxPayMicroPay.Response> {
         return _params;
     }
 
+    @Override
     protected String __doGetRequestURL() {
         return "pay/micropay";
     }
 
+    @Override
     protected Response __doParseResponse(IHttpResponse httpResponse) throws Exception {
         return new Response(httpResponse.getContent());
     }

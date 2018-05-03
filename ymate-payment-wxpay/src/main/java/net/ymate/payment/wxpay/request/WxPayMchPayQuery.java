@@ -82,10 +82,12 @@ public class WxPayMchPayQuery extends WxPayBaseRequest<WxPayMchPayQuery.Response
         return _params;
     }
 
+    @Override
     protected String __doGetRequestURL() {
         return "mmpaymkttransfers/gettransferinfo";
     }
 
+    @Override
     protected Response __doParseResponse(IHttpResponse httpResponse) throws Exception {
         return new Response(httpResponse.getContent());
     }

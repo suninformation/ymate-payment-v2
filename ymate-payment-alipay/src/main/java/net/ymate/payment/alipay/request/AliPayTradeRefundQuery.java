@@ -83,6 +83,7 @@ public class AliPayTradeRefundQuery extends AliPayBaseRequest<TradeRefundQueryDa
         @JSONField(name = "total_amount")
         private String totalAmount;
 
+        @Override
         public boolean successful() {
             return StringUtils.isNotBlank(outRequestNo);
         }

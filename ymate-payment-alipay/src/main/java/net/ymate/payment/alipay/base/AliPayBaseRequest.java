@@ -74,6 +74,7 @@ public class AliPayBaseRequest<DATA extends IAliPayRequestData, RESPONSE extends
         this.responseParser = responseParser;
     }
 
+    @Override
     public IAliPayReqeustSender<RESPONSE> build() throws Exception {
         Map<String, String> _params = new HashMap<String, String>();
         //
@@ -107,14 +108,17 @@ public class AliPayBaseRequest<DATA extends IAliPayRequestData, RESPONSE extends
         return new DefaultAliPayRequestSender<RESPONSE>(_params, _charset, this.responseParser);
     }
 
+    @Override
     public AliPayAccountMeta getAccountMeta() {
         return accountMeta;
     }
 
+    @Override
     public String getMethod() {
         return method;
     }
 
+    @Override
     public String getVersion() {
         return version;
     }

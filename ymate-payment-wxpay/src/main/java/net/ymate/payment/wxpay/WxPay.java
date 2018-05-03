@@ -55,10 +55,12 @@ public class WxPay implements IModule, IWxPay {
         return __instance;
     }
 
+    @Override
     public String getName() {
         return IWxPay.MODULE_NAME;
     }
 
+    @Override
     public void init(YMP owner) throws Exception {
         if (!__inited) {
             //
@@ -73,10 +75,12 @@ public class WxPay implements IModule, IWxPay {
         }
     }
 
+    @Override
     public boolean isInited() {
         return __inited;
     }
 
+    @Override
     public WxPayUnifiedOrder unifiedOrder(String appId, String body, String outTradeNo, Integer totalFee, String spbillCreateIp, String notifyUrl, TradeType tradeType) throws Exception {
         WxPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
         if (_meta != null) {
@@ -85,6 +89,7 @@ public class WxPay implements IModule, IWxPay {
         return null;
     }
 
+    @Override
     public WxPayCloseOrder closeOrder(String appId, String outTradeNo) throws Exception {
         WxPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
         if (_meta != null) {
@@ -93,6 +98,7 @@ public class WxPay implements IModule, IWxPay {
         return null;
     }
 
+    @Override
     public WxPayDownloadBill downloadBill(String appId, String billData, BillType billType) throws Exception {
         WxPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
         if (_meta != null) {
@@ -101,6 +107,7 @@ public class WxPay implements IModule, IWxPay {
         return null;
     }
 
+    @Override
     public WxPayMchPay mchPay(String appId, String partnerTradeNo, String openId, boolean checkName, Integer amount, String desc, String spbillCreateIp) throws Exception {
         WxPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
         if (_meta != null) {
@@ -109,6 +116,7 @@ public class WxPay implements IModule, IWxPay {
         return null;
     }
 
+    @Override
     public WxPayMchPayQuery mchPayQuery(String appId, String partnerTradeNo) throws Exception {
         WxPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
         if (_meta != null) {
@@ -117,6 +125,7 @@ public class WxPay implements IModule, IWxPay {
         return null;
     }
 
+    @Override
     public WxPayOrderQuery orderQuery(String appId, String transactionId, String outTradeNo) throws Exception {
         WxPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
         if (_meta != null) {
@@ -125,6 +134,7 @@ public class WxPay implements IModule, IWxPay {
         return null;
     }
 
+    @Override
     public WxPayRedPackSend redPackSend(String appId, String mchBillNo, String sendName, String reOpenId, Integer totalAmount, Integer totalNum, String wishing, String clientIp, String actName, String remark) throws Exception {
         WxPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
         if (_meta != null) {
@@ -133,6 +143,7 @@ public class WxPay implements IModule, IWxPay {
         return null;
     }
 
+    @Override
     public WxPayRedPackSendGroup redPackSendGroup(String appId, String mchBillNo, String sendName, String reOpenId, Integer totalAmount, Integer totalNum, String wishing, String clientIp, String actName, String remark) throws Exception {
         WxPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
         if (_meta != null) {
@@ -141,6 +152,7 @@ public class WxPay implements IModule, IWxPay {
         return null;
     }
 
+    @Override
     public WxPayRedPackInfo redPackInfo(String appId, String mchBillNo) throws Exception {
         WxPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
         if (_meta != null) {
@@ -149,6 +161,7 @@ public class WxPay implements IModule, IWxPay {
         return null;
     }
 
+    @Override
     public WxPayRefund refund(String appId, String transactionId, String outTradeNo, String outRefundNo, Integer totalFee, Integer refundFee) throws Exception {
         WxPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
         if (_meta != null) {
@@ -157,6 +170,7 @@ public class WxPay implements IModule, IWxPay {
         return null;
     }
 
+    @Override
     public WxPayRefundQuery refundQuery(String appId, String transactionId, String outTradeNo, String outRefundNo, String refundId) throws Exception {
         WxPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
         if (_meta != null) {
@@ -165,6 +179,7 @@ public class WxPay implements IModule, IWxPay {
         return null;
     }
 
+    @Override
     public WxPayShortUrl shortUrl(String appId, String longUrl) throws Exception {
         WxPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
         if (_meta != null) {
@@ -173,6 +188,7 @@ public class WxPay implements IModule, IWxPay {
         return null;
     }
 
+    @Override
     public WxPayMicroPay microPay(String appId, String body, String outTradeNo, Integer totalFee, String spbillCreateIp, String authCode) throws Exception {
         WxPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
         if (_meta != null) {
@@ -181,6 +197,7 @@ public class WxPay implements IModule, IWxPay {
         return null;
     }
 
+    @Override
     public WxPayReverse reverse(String appId, String transactionId, String outTradeNo) throws Exception {
         WxPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
         if (_meta != null) {
@@ -189,6 +206,7 @@ public class WxPay implements IModule, IWxPay {
         return null;
     }
 
+    @Override
     public WxPayAuthCodeToOpenId authCodeToOpenId(String appId, String authCode) throws Exception {
         WxPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
         if (_meta != null) {
@@ -197,6 +215,7 @@ public class WxPay implements IModule, IWxPay {
         return null;
     }
 
+    @Override
     public void destroy() throws Exception {
         if (__inited) {
             __inited = false;
@@ -208,10 +227,12 @@ public class WxPay implements IModule, IWxPay {
         }
     }
 
+    @Override
     public YMP getOwner() {
         return __owner;
     }
 
+    @Override
     public IWxPayModuleCfg getModuleCfg() {
         return __moduleCfg;
     }

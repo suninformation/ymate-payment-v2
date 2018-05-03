@@ -27,7 +27,7 @@ import net.ymate.payment.wxpay.request.WxPayOrderQuery;
 import net.ymate.payment.wxpay.request.WxPayUnifiedOrder;
 import net.ymate.payment.wxpay.support.WxPayRequestProcessor;
 import net.ymate.platform.core.util.RuntimeUtils;
-import net.ymate.platform.validation.validate.VRequried;
+import net.ymate.platform.validation.validate.VRequired;
 import net.ymate.platform.webmvc.annotation.*;
 import net.ymate.platform.webmvc.base.Type;
 import net.ymate.platform.webmvc.view.IView;
@@ -119,7 +119,7 @@ public class WxPayNotifyController {
      * @throws Exception 可能产生的任何异常
      */
     @RequestMapping(value = "{app_id}/callback", method = {Type.HttpMethod.GET, Type.HttpMethod.POST})
-    public IView __doCallback(@PathVariable("app_id") String appId, @VRequried @RequestParam String state) throws Exception {
+    public IView __doCallback(@PathVariable("app_id") String appId, @VRequired @RequestParam String state) throws Exception {
         IWxPayEventHandler _eventHandler = WxPay.get().getModuleCfg().getEventHandler();
         if (_eventHandler != null) {
             if (_eventHandler.onReturnCallback(state)) {

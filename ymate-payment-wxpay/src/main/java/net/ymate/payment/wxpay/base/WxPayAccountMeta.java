@@ -15,19 +15,16 @@
  */
 package net.ymate.payment.wxpay.base;
 
+import net.ymate.framework.commons.HttpClientHelper;
 import net.ymate.payment.wxpay.request.WxPaySandboxSignKey;
 import net.ymate.platform.core.util.RuntimeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.conn.ssl.SSLContexts;
 
-import javax.net.ssl.SSLContext;
-import java.io.InputStream;
 import java.io.Serializable;
 import java.net.URL;
-import java.security.KeyStore;
 
 /**
  * @author 刘镇 (suninformation@163.com) on 17/6/15 下午1:24
@@ -138,23 +135,9 @@ public class WxPayAccountMeta implements Serializable {
     public SSLConnectionSocketFactory getConnectionSocketFactory() {
         if (connectionSocketFactory == null) {
             synchronized (this) {
-                if (this.connectionSocketFactory == null && StringUtils.isNotBlank(this.mchId) && StringUtils.isNotBlank(this.certFilePath)) {
+                if (connectionSocketFactory == null && StringUtils.isNotBlank(mchId) && StringUtils.isNotBlank(certFilePath)) {
                     try {
-                        // 指定读取证书格式为PKCS12
-                        KeyStore _keyStore = KeyStore.getInstance("PKCS12");
-                        // 读取PKCS12证书文件流
-                        InputStream _certFileStream = new URL(this.certFilePath).openStream();
-                        //
-                        char[] _mchIdChars = this.mchId.toCharArray();
-                        try {
-                            // 指定PKCS12的密码(商户ID)
-                            _keyStore.load(_certFileStream, _mchIdChars);
-                        } finally {
-                            _certFileStream.close();
-                        }
-                        SSLContext _sslContext = SSLContexts.custom().loadKeyMaterial(_keyStore, _mchIdChars).build();
-                        // 指定TLS版本
-                        connectionSocketFactory = new SSLConnectionSocketFactory(_sslContext, new String[]{"TLSv1"}, null, SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
+                        connectionSocketFactory = HttpClientHelper.createConnectionSocketFactory(new URL(certFilePath), mchId.toCharArray());
                     } catch (Exception e) {
                         _LOG.warn("", RuntimeUtils.unwrapThrow(e));
                     }

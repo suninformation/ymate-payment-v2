@@ -120,9 +120,5 @@
             <groupId>net.ymate.framework</groupId>
             <artifactId>ymate-framework-core</artifactId>
         </dependency>
-        <dependency>
-            <groupId>net.ymate.framework</groupId>
-            <artifactId>ymate-framework-unpack</artifactId>
-        </dependency>
     </dependencies>
 </project>

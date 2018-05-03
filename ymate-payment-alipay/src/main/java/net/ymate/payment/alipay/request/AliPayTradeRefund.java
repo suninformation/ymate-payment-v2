@@ -79,6 +79,7 @@ public class AliPayTradeRefund extends AliPayBaseRequest<TradeRefundData, AliPay
         @JSONField(name = "refund_detail_item_list")
         private FundItemData[] detailItems;
 
+        @Override
         public boolean successful() {
             return StringUtils.equalsIgnoreCase(fundChange, "Y");
         }

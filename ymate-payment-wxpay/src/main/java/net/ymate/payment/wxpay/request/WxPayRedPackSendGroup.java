@@ -53,6 +53,7 @@ public class WxPayRedPackSendGroup extends WxPayRedPackSend {
         return _params;
     }
 
+    @Override
     protected String __doGetRequestURL() {
         return "mmpaymkttransfers/sendgroupredpack";
     }

@@ -83,10 +83,12 @@ public class WxPayAuthCodeToOpenId extends WxPayBaseRequest<WxPayAuthCodeToOpenI
         return _params;
     }
 
+    @Override
     protected String __doGetRequestURL() {
         return "tools/authcodetoopenid";
     }
 
+    @Override
     protected Response __doParseResponse(IHttpResponse httpResponse) throws Exception {
         return new Response(httpResponse.getContent());
     }

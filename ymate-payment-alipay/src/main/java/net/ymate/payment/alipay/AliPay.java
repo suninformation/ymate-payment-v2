@@ -60,10 +60,12 @@ public class AliPay implements IModule, IAliPay {
         return __instance;
     }
 
+    @Override
     public String getName() {
         return IAliPay.MODULE_NAME;
     }
 
+    @Override
     public void init(YMP owner) throws Exception {
         if (!__inited) {
             //
@@ -78,10 +80,12 @@ public class AliPay implements IModule, IAliPay {
         }
     }
 
+    @Override
     public boolean isInited() {
         return __inited;
     }
 
+    @Override
     public IAliPayRequest tradePagePay(String appId, String orderId, String attach) throws Exception {
         AliPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
         if (_meta != null && __moduleCfg.getEventHandler() != null) {
@@ -90,6 +94,7 @@ public class AliPay implements IModule, IAliPay {
         return null;
     }
 
+    @Override
     public IAliPayRequest tradeWapPay(String appId, String orderId, String attach) throws Exception {
         AliPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
         if (_meta != null && __moduleCfg.getEventHandler() != null) {
@@ -98,6 +103,7 @@ public class AliPay implements IModule, IAliPay {
         return null;
     }
 
+    @Override
     public IAliPayRequest<AliPayTradeQuery.Response> tradeQuery(String appId, String tradeNo, String outTradeNo) throws Exception {
         AliPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
         if (_meta != null) {
@@ -106,6 +112,7 @@ public class AliPay implements IModule, IAliPay {
         return null;
     }
 
+    @Override
     public IAliPayRequest<AliPayTradeRefund.Response> tradeRefund(String appId, TradeRefundData refundData) throws Exception {
         AliPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
         if (_meta != null) {
@@ -114,6 +121,7 @@ public class AliPay implements IModule, IAliPay {
         return null;
     }
 
+    @Override
     public IAliPayRequest<AliPayTradeRefundQuery.Response> tradeRefundQuery(String appId, String tradeNo, String outTradeNo, String outRequestNo) throws Exception {
         AliPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
         if (_meta != null) {
@@ -122,6 +130,7 @@ public class AliPay implements IModule, IAliPay {
         return null;
     }
 
+    @Override
     public IAliPayRequest<AliPayTradeClose.Response> tradeClose(String appId, String tradeNo, String outTradeNo) throws Exception {
         AliPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
         if (_meta != null) {
@@ -130,6 +139,7 @@ public class AliPay implements IModule, IAliPay {
         return null;
     }
 
+    @Override
     public IAliPayRequest<AliPayBillDownloadUrlQuery.Response> billDownloadUrlQuery(String appId, String billType, String billDate) throws Exception {
         AliPayAccountMeta _meta = __moduleCfg.getAccountProvider().getAccount(appId);
         if (_meta != null) {
@@ -138,6 +148,7 @@ public class AliPay implements IModule, IAliPay {
         return null;
     }
 
+    @Override
     public String onNotify(AliPayBaseNotify baseNotify) throws Exception {
         IAliPayEventHandler _handler = __moduleCfg.getEventHandler();
         try {
@@ -149,10 +160,12 @@ public class AliPay implements IModule, IAliPay {
         return "success";
     }
 
+    @Override
     public IView onReturnCallback(AliPayBaseReturn baseReturn) throws Exception {
         return __moduleCfg.getEventHandler().onReturnCallback(baseReturn);
     }
 
+    @Override
     public void destroy() throws Exception {
         if (__inited) {
             __inited = false;
@@ -164,10 +177,12 @@ public class AliPay implements IModule, IAliPay {
         }
     }
 
+    @Override
     public YMP getOwner() {
         return __owner;
     }
 
+    @Override
     public IAliPayModuleCfg getModuleCfg() {
         return __moduleCfg;
     }

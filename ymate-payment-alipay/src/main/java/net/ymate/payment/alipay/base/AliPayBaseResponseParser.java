@@ -49,6 +49,7 @@ public class AliPayBaseResponseParser<RESPONSE extends IAliPayResponse> implemen
         __methodName = StringUtils.replace(methodName, ".", "_") + IAliPay.Const.RESPONSE_SUFFIX;
     }
 
+    @Override
     public RESPONSE parserResponse(String responseContent) throws Exception {
         JSONObject _result = JSON.parseObject(responseContent);
         String _sign = _result.getString(IAliPay.Const.SIGN);

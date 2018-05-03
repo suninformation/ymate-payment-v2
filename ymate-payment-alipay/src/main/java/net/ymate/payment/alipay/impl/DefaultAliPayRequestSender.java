@@ -53,14 +53,17 @@ public class DefaultAliPayRequestSender<RESPONSE extends IAliPayResponse> implem
         this.responseParser = responseParser;
     }
 
+    @Override
     public String getGatewayUrl() {
         return gatewayUrl;
     }
 
+    @Override
     public Map<String, String> getRequestParameters() {
         return requestParameters;
     }
 
+    @Override
     public RESPONSE execute() throws Exception {
         IHttpResponse _response = HttpClientHelper.create().post(this.gatewayUrl, this.requestParameters);
         if (_response != null) {
@@ -73,6 +76,7 @@ public class DefaultAliPayRequestSender<RESPONSE extends IAliPayResponse> implem
         return null;
     }
 
+    @Override
     public String executeActionForm() {
         // 此处在网关URL地址中添加字符集配置参数，主要为解决中文乱码问题
         if (!StringUtils.containsIgnoreCase(this.gatewayUrl, "charset=")) {

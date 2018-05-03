@@ -78,26 +78,32 @@ public class DefaultModuleCfg implements IWxPayModuleCfg {
         __signCheckDisabled = BlurObject.bind(_moduleCfgs.get("sign_check_disabled")).toBooleanValue();
     }
 
+    @Override
     public IWxPayAccountProvider getAccountProvider() {
         return __accountProvider;
     }
 
+    @Override
     public IWxPayEventHandler getEventHandler() {
         return __eventHandler;
     }
 
+    @Override
     public String getDefaultAccountId() {
         return __defaultAccountId;
     }
 
+    @Override
     public String getJsApiView() {
         return __jsApiView;
     }
 
+    @Override
     public String getNativeView() {
         return __nativeView;
     }
 
+    @Override
     public boolean isSignCheckDisabled() {
         return __signCheckDisabled;
     }

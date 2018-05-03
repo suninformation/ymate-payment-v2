@@ -102,10 +102,12 @@ public class WxPayRedPackInfo extends WxPayBaseRequest<WxPayRedPackInfo.Response
         return _params;
     }
 
+    @Override
     protected String __doGetRequestURL() {
         return "mmpaymkttransfers/gethbinfo";
     }
 
+    @Override
     protected Response __doParseResponse(IHttpResponse httpResponse) throws Exception {
         return new Response(httpResponse.getContent());
     }

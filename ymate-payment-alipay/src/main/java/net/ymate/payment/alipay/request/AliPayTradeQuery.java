@@ -114,6 +114,7 @@ public class AliPayTradeQuery extends AliPayBaseRequest<TradeQueryData, AliPayTr
         @JSONField(name = "voucher_detail_list")
         private VoucherItemData[] voucherDatails;
 
+        @Override
         public boolean successful() {
             return StringUtils.equalsIgnoreCase(IAliPay.TradeStatus.TRADE_SUCCESS.name(), tradeStatus);
         }

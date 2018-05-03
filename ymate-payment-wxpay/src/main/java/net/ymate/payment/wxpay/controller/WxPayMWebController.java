@@ -21,7 +21,7 @@ import net.ymate.payment.wxpay.IWxPayEventHandler;
 import net.ymate.payment.wxpay.WxPay;
 import net.ymate.payment.wxpay.base.WxPayAccountMeta;
 import net.ymate.payment.wxpay.request.WxPayUnifiedOrder;
-import net.ymate.platform.validation.validate.VRequried;
+import net.ymate.platform.validation.validate.VRequired;
 import net.ymate.platform.webmvc.annotation.Controller;
 import net.ymate.platform.webmvc.annotation.PathVariable;
 import net.ymate.platform.webmvc.annotation.RequestMapping;
@@ -46,7 +46,7 @@ public class WxPayMWebController {
 
     @RequestMapping(value = "{app_id}/mweb", method = {Type.HttpMethod.GET, Type.HttpMethod.POST})
     public IView __doMWeb(@PathVariable("app_id") String appId,
-                          @VRequried @RequestParam String state,
+                          @VRequired @RequestParam String state,
                           @RequestParam String attach,
                           @RequestParam("redirect_url") String redirectUrl) throws Exception {
         IWxPayEventHandler _eventHandler = WxPay.get().getModuleCfg().getEventHandler();
