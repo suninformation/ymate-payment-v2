@@ -20,8 +20,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <ymate.platform.version>2.0.5</ymate.platform.version>
-        <ymate.framework.version>2.0.5</ymate.framework.version>
+        <ymate.platform.version>2.0.6</ymate.platform.version>
+        <ymate.framework.version>2.0.6</ymate.framework.version>
     </properties>
 
     <developers>
@@ -138,7 +138,7 @@
             <dependency>
                 <groupId>com.google.zxing</groupId>
                 <artifactId>core</artifactId>
-                <version>3.3.2</version>
+                <version>3.3.3</version>
             </dependency>
             <dependency>
                 <groupId>net.ymate.platform</groupId>
