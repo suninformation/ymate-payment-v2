@@ -86,9 +86,6 @@ public class AliPayException extends Exception {
         __ERRORS.put("ACQ.REASON_TRADE_REFUND_FEE_ERR", "退款金额无效");
         __ERRORS.put("ACQ.TRADE_NOT_ALLOW_REFUND", "当前交易不允许退款");
         //
-        __ERRORS.put("ACQ.TRADE_NOT_EXIST", "交易不存在");
-        __ERRORS.put("ACQ.TRADE_STATUS_ERROR", "交易状态不合法");
-        __ERRORS.put("ACQ.INVALID_PARAMETER", "参数无效");
         __ERRORS.put("TRADE_NOT_EXIST", "查询退款的交易不存在");
         __ERRORS.put("INVAILID_ARGUMENTS", "入参不合法");
         __ERRORS.put("BILL_NOT_EXIST", "账单不存在");

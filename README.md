@@ -306,7 +306,7 @@ ymp.configs.payment.alipay.return_url=
     
         /**
          * @param orderId 订单ID
-         * @return 返回是否需要发启订单状态查询
+         * @return 返回是否需要发起订单状态查询
          * @throws Exception 可能产生的任何异常
          */
         public boolean onReturnCallback(String orderId) throws Exception {
@@ -341,13 +341,19 @@ ymp.configs.payment.alipay.return_url=
     微信JS_API模式：
 
     ```
-    http://<域名>/payment/wxpay/jsapi/<APP_ID>?open_id=<OPEN_ID>state=<订单编号>&attach=<附加信息>&debug=<true|false>
+    http://<域名>/payment/wxpay/<APP_ID>/jsapi?open_id=<OPEN_ID>state=<订单编号>&attach=<附加信息>&debug=<true|false>
     ```
     
     微信H5支付模式：
     
     ```
     http://<域名>/payment/wxpay/<APP_ID>/mweb?state=<订单编号>&attach=<附加信息>&redirect_url=<重定向URL地址>
+    ```
+    
+    微信APP模式：
+    
+    ```
+    http://<域名>/payment/wxpay/<APP_ID>/app?state=<订单编号>&attach=<附加信息>
     ```
     
     微信Native(原生)支付模式一：

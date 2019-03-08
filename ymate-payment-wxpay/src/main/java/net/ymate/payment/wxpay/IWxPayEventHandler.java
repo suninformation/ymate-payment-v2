@@ -45,7 +45,7 @@ public interface IWxPayEventHandler {
 
     /**
      * @param orderId 订单ID
-     * @return 返回是否需要发启订单状态查询
+     * @return 返回是否需要发起订单状态查询
      * @throws Exception 可能产生的任何异常
      */
     boolean onReturnCallback(String orderId) throws Exception;

@@ -16,13 +16,13 @@
 package net.ymate.payment.wxpay.controller;
 
 import net.ymate.framework.commons.QRCodeHelper;
-import net.ymate.framework.core.util.WebUtils;
 import net.ymate.platform.validation.validate.VLength;
 import net.ymate.platform.webmvc.annotation.Controller;
 import net.ymate.platform.webmvc.annotation.PathVariable;
 import net.ymate.platform.webmvc.annotation.RequestMapping;
 import net.ymate.platform.webmvc.annotation.RequestParam;
 import net.ymate.platform.webmvc.context.WebContext;
+import net.ymate.platform.webmvc.util.WebUtils;
 import net.ymate.platform.webmvc.view.IView;
 import net.ymate.platform.webmvc.view.impl.NullView;
 

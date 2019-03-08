@@ -16,7 +16,6 @@
 package net.ymate.payment.wxpay.controller;
 
 import net.ymate.framework.commons.ParamUtils;
-import net.ymate.framework.core.util.WebUtils;
 import net.ymate.payment.wxpay.IWxPay;
 import net.ymate.payment.wxpay.IWxPayEventHandler;
 import net.ymate.payment.wxpay.WxPay;
@@ -31,6 +30,7 @@ import net.ymate.platform.webmvc.annotation.RequestMapping;
 import net.ymate.platform.webmvc.annotation.RequestParam;
 import net.ymate.platform.webmvc.base.Type;
 import net.ymate.platform.webmvc.context.WebContext;
+import net.ymate.platform.webmvc.util.WebUtils;
 import net.ymate.platform.webmvc.view.IView;
 import net.ymate.platform.webmvc.view.View;
 import net.ymate.platform.webmvc.view.impl.HttpStatusView;

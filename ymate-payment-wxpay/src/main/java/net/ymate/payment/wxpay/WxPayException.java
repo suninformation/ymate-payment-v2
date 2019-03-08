@@ -15,6 +15,8 @@
  */
 package net.ymate.payment.wxpay;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * @author 刘镇 (suninformation@163.com) on 17/6/19 上午10:46
  * @version 1.0
@@ -54,5 +56,13 @@ public class WxPayException extends Exception {
 
     public String getErrMsg() {
         return errMsg;
+    }
+
+    @Override
+    public String getMessage() {
+        if (StringUtils.isNotBlank(errCode)) {
+            return "[" + errCode + ']' + StringUtils.trimToEmpty(errMsg);
+        }
+        return super.getMessage();
     }
 }

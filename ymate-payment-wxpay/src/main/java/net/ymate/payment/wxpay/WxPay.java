@@ -34,7 +34,7 @@ public class WxPay implements IModule, IWxPay {
 
     private static final Log _LOG = LogFactory.getLog(WxPay.class);
 
-    public static final Version VERSION = new Version(1, 0, 0, WxPay.class.getPackage().getImplementationVersion(), Version.VersionType.Alphal);
+    public static final Version VERSION = new Version(2, 0, 0, WxPay.class.getPackage().getImplementationVersion(), Version.VersionType.Alpha);
 
     private static volatile IWxPay __instance;
 

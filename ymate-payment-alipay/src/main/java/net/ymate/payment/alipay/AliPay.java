@@ -39,7 +39,7 @@ public class AliPay implements IModule, IAliPay {
 
     private static final Log _LOG = LogFactory.getLog(AliPay.class);
 
-    public static final Version VERSION = new Version(2, 0, 0, AliPay.class.getPackage().getImplementationVersion(), Version.VersionType.Alphal);
+    public static final Version VERSION = new Version(2, 0, 0, AliPay.class.getPackage().getImplementationVersion(), Version.VersionType.Alpha);
 
     private static volatile IAliPay __instance;
 

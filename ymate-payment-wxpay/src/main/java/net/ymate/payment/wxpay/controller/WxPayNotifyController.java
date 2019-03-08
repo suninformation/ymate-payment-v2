@@ -15,7 +15,6 @@
  */
 package net.ymate.payment.wxpay.controller;
 
-import net.ymate.framework.webmvc.WebResult;
 import net.ymate.payment.wxpay.IWxPay;
 import net.ymate.payment.wxpay.IWxPayEventHandler;
 import net.ymate.payment.wxpay.WxPay;
@@ -30,6 +29,7 @@ import net.ymate.platform.core.util.RuntimeUtils;
 import net.ymate.platform.validation.validate.VRequired;
 import net.ymate.platform.webmvc.annotation.*;
 import net.ymate.platform.webmvc.base.Type;
+import net.ymate.platform.webmvc.util.WebResult;
 import net.ymate.platform.webmvc.view.IView;
 import net.ymate.platform.webmvc.view.impl.HttpStatusView;
 import net.ymate.platform.webmvc.view.impl.TextView;
@@ -127,7 +127,7 @@ public class WxPayNotifyController {
                 WxPayOrderQuery.Response _response = _query.execute();
                 _eventHandler.onNotifyReceived(_response);
                 //
-                return WebResult.SUCCESS().dataAttr("trade_state", _response.tradeState()).dataAttr("trade_state_desc", _response.tradeStateDesc()).toJSON();
+                return WebResult.succeed().dataAttr("trade_state", _response.tradeState()).dataAttr("trade_state_desc", _response.tradeStateDesc()).toJSON();
             }
         }
         return HttpStatusView.bind(HttpServletResponse.SC_BAD_REQUEST);

@@ -45,9 +45,8 @@ public class AliPaySignatureCheckInterceptor implements IInterceptor {
     @Override
     public Object intercept(InterceptContext context) throws Exception {
         if (!AliPay.get().getModuleCfg().isSignCheckDisabled()) {
-            switch (context.getDirection()) {
-                case BEFORE:
-                    return __doSignCheck(context);
+            if (context.getDirection() == Direction.BEFORE) {
+                return __doSignCheck(context);
             }
         }
         return null;

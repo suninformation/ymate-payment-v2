@@ -16,7 +16,6 @@
 package net.ymate.payment.wxpay.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import net.ymate.framework.core.util.WebUtils;
 import net.ymate.payment.wxpay.IWxPay;
 import net.ymate.payment.wxpay.IWxPayEventHandler;
 import net.ymate.payment.wxpay.WxPay;
@@ -31,6 +30,7 @@ import net.ymate.platform.webmvc.annotation.RequestMapping;
 import net.ymate.platform.webmvc.annotation.RequestParam;
 import net.ymate.platform.webmvc.base.Type;
 import net.ymate.platform.webmvc.context.WebContext;
+import net.ymate.platform.webmvc.util.WebUtils;
 import net.ymate.platform.webmvc.view.IView;
 import net.ymate.platform.webmvc.view.View;
 import net.ymate.platform.webmvc.view.impl.HttpStatusView;
@@ -63,10 +63,11 @@ public class WxPayJsApiController {
      * @param openId 微信用户身份唯一标识
      * @param state  商品或订单ID
      * @param attach 附加信息
+     * @param debug  是否开启调试模式
      * @return 微信支付 -- JS_API模式
      * @throws Exception 可能产生的任何异常
      */
-    @RequestMapping(value = "/jsapi/{app_id}", method = {Type.HttpMethod.GET, Type.HttpMethod.POST})
+    @RequestMapping(value = "/{app_id}/jsapi", method = {Type.HttpMethod.GET, Type.HttpMethod.POST})
     public IView __doJsApi(@PathVariable("app_id") String appId,
                            @VRequired @RequestParam("open_id") String openId,
                            @VRequired @RequestParam String state,
@@ -82,7 +83,7 @@ public class WxPayJsApiController {
                 if (_response.checkReturnCode() && _response.checkResultCode() && (WxPay.get().getModuleCfg().isSignCheckDisabled() || _response.checkSignature(_meta.getMchKey()))) {
                     // 封装JSAPI初始化相关参数
                     String _queryStr = StringUtils.trimToNull(WebContext.getRequest().getQueryString());
-                    String _currentURL = WebUtils.buildURL(WebContext.getRequest(), "payment/wxpay/jsapi/" + appId + (_queryStr == null ? "" : "?" + _queryStr), true);
+                    String _currentURL = WebUtils.buildURL(WebContext.getRequest(), "payment/wxpay/" + appId + "/jsapi" + (_queryStr == null ? "" : "?" + _queryStr), true);
                     //
                     String _timestamp = DateTimeUtils.currentTimeUTC() + "";
                     String _nonceStr = WxPayBaseData.__doCreateNonceStr();
